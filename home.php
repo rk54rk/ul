@@ -12,6 +12,8 @@
 
 get_header(); ?>
 
+<div style="height:10px;"></div>
 <?php include(locate_template( 'parts/facevalue/facevalue.php' )); ?>
+<div>&nbsp;</div>
 
 <?php get_footer(); ?>

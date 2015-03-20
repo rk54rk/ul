@@ -1,7 +1,5 @@
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/parts/facevalue/facevalue.css">
 
-Face Value 1.0
-
 <div id="facevalue">
 </div>
 

@@ -1,1 +1,4 @@
-#facevalue{background-color:#EEE;min-height:5px;}
+.fv_char{float:left;}
+.fv_pixel{float:left;}
+.on{background-color:#444;}
+.off{background-color:#DDD;}
