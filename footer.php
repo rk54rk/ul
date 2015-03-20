@@ -7,19 +7,18 @@
  * @package ul
  */
 ?>
-
-	</div><!-- #content -->
+        </div><!-- .container -->
+    </div><!-- #content -->
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'http://wordpress.org/', 'ul' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'ul' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( __( 'Theme: %1$s by %2$s.', 'ul' ), 'ul', '<a href="http://underscores.me/" rel="designer">Underscores.me</a>' ); ?>
+			Unlimited Ltd.
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -5,6 +5,15 @@
  * @package ul
  */
 
+
+/**
+ * Including modules.
+ */
+require get_template_directory() . '/functions/redirect.php';
+
+
+
+
 /**
  * Set the content width based on the theme's design and stylesheet.
  */

@@ -1,0 +1,1 @@
+var data_json = '{ "value" : "100" }';
