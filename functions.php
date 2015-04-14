@@ -10,8 +10,17 @@
  * Including modules.
  */
 require get_template_directory() . '/functions/redirect.php';
+require get_template_directory() . '/functions/ad-uploader.php';
+require get_template_directory() . '/functions/functions.php';
 
+//include dependencies
+function wpbootstrap_scripts_with_jquery()
+{
+    // Register the script like this for a theme:
+    wp_enqueue_script( 'bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js', array( 'jquery' ) );
+}
 
+add_action( 'wp_enqueue_scripts', 'wpbootstrap_scripts_with_jquery' );
 
 
 /**

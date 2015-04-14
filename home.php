@@ -12,8 +12,27 @@
 
 get_header(); ?>
 
-<div style="height:10px;"></div>
-<?php include(locate_template( 'parts/facevalue/facevalue.php' )); ?>
-<div>&nbsp;</div>
+<div class="page-title" style="text-align:center;position:relative;top:-45px">Total value of the company</div>
 
-<?php get_footer(); ?>
+<div class="container" style="height:100vh">
+    
+    <div style="height:30px;"></div>
+    
+    <?php include(locate_template( 'parts/facevalue/facevalue.php' )); ?>
+    
+    <div style="height:100px;"></div>
+    <p style="text-align:center;"><a href="<?php echo site_url( '/buy', 'http' ); ?>">Buy an advertising for £10.</a> | <a href="<?php echo site_url( '/buy', 'http' ); ?>">View all advertising</a></p>
+    
+</div>
+
+<div class="container-fluid">
+	<div class="row" style="background-color:#FFFFC0">
+    	<div class="container">
+        	<div class="infinity-scroll">
+            <h3 style="text-align:center;">The Unlimited Limited is an experimental commercial organization. </h3>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            </div>
+        </div>
+    </div>
+</div>
+<?php get_footer();?>

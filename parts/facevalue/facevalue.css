@@ -1,4 +1,5 @@
 .fv_char{float:left;}
-.fv_pixel{float:left;}
-.on{background-color:#444;}
-.off{background-color:#DDD;}
+.fv_kerning{float:left;}
+.fv_pixel{float:left;box-shadow: 5px 5px 5px #CCC;}
+.on{background-size: cover;}
+.off{box-shadow: none;}

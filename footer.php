@@ -10,15 +10,18 @@
         </div><!-- .container -->
     </div><!-- #content -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
+	<footer id="colophon" style="display:none;" class="site-footer" role="contentinfo">
 		<div class="site-info">
-			Unlimited Ltd.
+			<a>Unlimited Ltd.</a>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+<div id="page-gradient" class="navbar navbar-default navbar-fixed-bottom">
+</div>
 
 </body>
 </html>

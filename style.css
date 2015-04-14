@@ -18,23 +18,35 @@ ul is based on Underscores http://underscores.me/, (C) 2012-2015 Automattic, Inc
 
 /*overall*/
 #colophon{text-align:center;}
+#page-gradient{min-height:25vh;border:none;pointer-events: none;
+  background: -webkit-linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1)); /* Standard syntax */
+}
 
 /*typography*/
 body, html{font-family: 'Trocchi', serif;}
-h1, h2, h3, h4, h5, h6, p{font-size:14px;font-weight:normal;color:#444;}
+span, p{font-size:14px;font-weight:normal;color:#444;}
 a{color:#444;}
+h1, h2, h3, h4, h5, h6{font-weight:normal;color:#444;}
 
 /*navbar*/
-.navbar-top{height:25px;min-height:25px;background-color:transparent;border-bottom:5px solid #444;margin-bottom:0}
-.navbar-home{height:25px;min-height:25px;background-color:transparent;border-bottom:5px solid #FFED00;margin-bottom:0}
+.navbar-top{height:25px;min-height:25px;background-color:transparent;border-bottom:none;margin-top:25px}
 .navbar a{color:#444;}
 #masthead {
-  background: -webkit-linear-gradient(#FFFFC0, white); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#FFFFC0, white); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(#FFFFC0, white); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#FFFFC0, white); /* Standard syntax */
+  background: -webkit-linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1)); /* Standard syntax */
 }
 ul.navbar-right{list-style:none;}
 ul.navbar-right li{margin-left:20px;}
 ul.navbar-right>li>a{color:#444!important;}
 
+.navbar-nav .dropdown-menu{margin-top:25px;border:none;background-color:rgba(255,255,192,1);text-align: right;box-shadow: none;padding-top:5px;}
+.navbar-nav .dropdown-menu li a{padding:5px 0;}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover{background-color:transparent;}
+
+/*ad*/
+.ad-img-s{}

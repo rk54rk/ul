@@ -15,7 +15,8 @@
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 <!-- Bootstrap from CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/inc/bootstrap.min.css">
+<!-- Google fonts -->
 <link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'>
 
 <?php wp_head(); ?>
@@ -25,32 +26,22 @@
 <div id="page" class="hfeed site">
 
 	<header id="masthead" class="site-header" role="banner">        
-        <nav class="navbar-top navbar navbar-default navbar-static-top">
+        <nav class="navbar-top navbar navbar-default navbar-static-top" style="z-index:9999;">
           <div class="container">
             <div class="navbar-header">
 			  <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
             </div>
             <ul class="navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu</span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">Buy advertising</a></li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Join the company</a></li>
+                    <li><a href="#">Boardroom</a></li>
                   </ul>
                 </li>
               </ul>
-          </div>
-        </nav>    
-        
-        <nav class="navbar-home navbar navbar-default navbar-static-top">
-          <div class="container">
-            <div class="navbar-header">
-			  Company value
-            </div>
           </div>
         </nav>        
             
@@ -58,4 +49,3 @@
 
 
 	<div id="content" class="site-content">
-    	<div class="container">

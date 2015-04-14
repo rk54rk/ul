@@ -1,1 +1,1 @@
-var data_json = '{ "value" : "0100100" }';
+var data = '{ "value" : "£98200" }';
