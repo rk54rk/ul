@@ -6,7 +6,7 @@ function ul_ad_add($title, $link, $ext){
         'ul_ad', 
         array( 
             'title' => $title,
-            'link' => $link,
+            'link' => 'http://'.$link,
         ), 
         array( 
             '%s',
@@ -36,10 +36,10 @@ function ul_ad_add($title, $link, $ext){
 
 function ul_ad_saveimg($id_new, $title, $ext, $size){
   //define sizes
-  if ($size == 's'){
+  if ($size == 'l'){
       $height = 600;
       $width = 600;
-  } else if ($size == 'l'){
+  } else if ($size == 's'){
       $height = 100;
       $width = 100;      
   }

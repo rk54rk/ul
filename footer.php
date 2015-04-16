@@ -20,7 +20,7 @@
 <?php wp_footer(); ?>
 
 
-<div id="page-gradient" class="navbar navbar-default navbar-fixed-bottom">
+<div id="page-gradient" class="navbar navbar-default navbar-fixed-bottom" style="display:none;">
 </div>
 
 </body>

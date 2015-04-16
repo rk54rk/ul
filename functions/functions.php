@@ -1,11 +1,18 @@
 <?php
 
+//export paypal balance to a file.
+function ul_balance_update_static(){
+    //var data = '{ "value" : "£0.00" }';
+    $content = "var data = '{ %22value%22 : %22£".get_paypal_balance()."%22 }'";
+    $path = ABSPATH.'wp-content/themes/ul/parts/facevalue/data.js';
+    file_put_contents($path , rawurldecode($content));
+}
+
 //export recent ads to a static file for facevalue.js to load.
 function ul_ad_data_update_static(){
     $content = json_encode(ul_ad_data_get(100));
     $path = ABSPATH.'wp-content/themes/ul/parts/facevalue/data_ad.json';
     file_put_contents($path , $content);
-    echo 'new data_ad.json generated';
 }
 
 //get recent advertising data from database ul_ad table

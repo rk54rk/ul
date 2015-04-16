@@ -12,6 +12,7 @@
 require get_template_directory() . '/functions/redirect.php';
 require get_template_directory() . '/functions/ad-uploader.php';
 require get_template_directory() . '/functions/functions.php';
+require get_template_directory() . '/functions/paypal-balance.php';
 
 //include dependencies
 function wpbootstrap_scripts_with_jquery()

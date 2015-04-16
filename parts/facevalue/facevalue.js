@@ -19,7 +19,7 @@ function fv_init(numbers){
 	var sheets = document.styleSheets;
 	var sheet = document.styleSheets[0];
 	
-	var pixel_size = (displayport.clientWidth) / (numbers.length * 4);
+	var pixel_size = (displayport.clientWidth) / (numbers.length * 4 - 1);
 	
 	sheet.insertRule(".fv_pixel{height:" + pixel_size + "px;width:" + pixel_size + "px;border-radius: " + pixel_size/2 + "px;}", 1);
 	sheet.insertRule(".fv_char{width:" + pixel_size*3 + "px;}", 1);
@@ -37,8 +37,10 @@ function fv_show(numbers, data_ad){
 		output_character = render_character(numbers[i], data_ad); 
 		output = output + output_character;
 		
-		//add kerning
-		output = output + '<div class="fv_kerning"><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div></div>';
+		//if not the last character, add kerning
+        if (i != numbers.length-1){
+		  output = output + '<div class="fv_kerning"><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div><div class="fv_pixel off"></div></div>';
+        }
 	}	
 	
 	displayport.innerHTML = output;
@@ -60,8 +62,10 @@ function render_character(character, data_ad){
 		if (font[character].indexOf(x) >= 0){
             var ad_count = counter(data_ad.length);
             var thumbnail_path = '/wp-content/uploads/ad/' + data_ad[ad_count].thumbnail;
-            
-			output = output + "<div class='fv_pixel on' style='background-image:url(" + thumbnail_path + ")'></div>"
+            var bigpic_path = '/wp-content/uploads/ad/' + data_ad[ad_count].bigpic;
+            var ad_link = data_ad[ad_count].link;
+                
+			output = output + "<div class='fv_pixel on' style='background-image:url(" + thumbnail_path + ")'><a href='" + ad_link + "' target='_blank'><div class='fv_bigpic' style='background-image:url(" + bigpic_path + ")'></div></a></div>"
             
 		} else {
 			output = output + '<div class="fv_pixel off"></div>'

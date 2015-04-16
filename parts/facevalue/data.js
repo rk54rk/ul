@@ -1,1 +1,1 @@
-var data = '{ "value" : "£98200" }';
+var data = '{ "value" : "£0.00" }'

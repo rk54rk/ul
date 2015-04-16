@@ -26,7 +26,7 @@
 <div id="page" class="hfeed site">
 
 	<header id="masthead" class="site-header" role="banner">        
-        <nav class="navbar-top navbar navbar-default navbar-static-top" style="z-index:9999;">
+        <nav class="navbar-top navbar navbar-default navbar-fixed-top" style="z-index:9999;">
           <div class="container">
             <div class="navbar-header">
 			  <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>

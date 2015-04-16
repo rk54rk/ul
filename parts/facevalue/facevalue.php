@@ -8,8 +8,3 @@
 <script src="<?php bloginfo('template_directory'); ?>/parts/facevalue/font.js"></script>
 <script src="<?php bloginfo('template_directory'); ?>/parts/facevalue/facevalue.js"></script>
 
-<?php
-
-ul_ad_data_update_static();
-    
-?>

@@ -12,7 +12,7 @@
 
 get_header();?>
 
-<div class="page-title" style="text-align:center;position:relative;top:-45px">Buy advertising</div>
+<div class="page-title">Buy advertising</div>
 
 <div class="container">
     <div>
@@ -53,11 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image'])) {
         
         <br><br>
         
-        <div class="ad-img-s" style="height:50px;width:50px;border-radius: 50%;box-shadow: 5px 5px 5px #CCC;background-size:cover;background-image: url('<?php echo $file_S;?>')"></div>
+        <div class="ad-img-s" style="height:50px;width:50px;border-radius: 50%;box-shadow: 4px 4px 12px rgba(0,0,0,0.2);background-size:cover;background-image: url('<?php echo $file_S;?>')"></div>
         
         <br><br>
         
-        <div class="ad-img-l" style="height:250px;width:250px;box-shadow: 10px 10px 10px #CCC;background-size:cover;background-image: url('<?php echo $file_L;?>')"></div>
+        <div class="ad-img-l" style="height:250px;width:250px;box-shadow: 8px 8px 24px rgba(0,0,0,0.2);background-size:cover;background-image: url('<?php echo $file_L;?>')"></div>
         
         <br><br>
     
@@ -95,7 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image'])) {
             
           <div class="form-group">
             <label for="exampleInputEmail1">Advertised link</label>
-            <input class="form-control" name="link" placeholder="Enter URL">
+            <div>
+                <span>http:// </span><input style="width:90%;display:inline" class="form-control" name="link" placeholder="Enter URL">
+            </div>
           </div>
             
           <div class="form-group">            
