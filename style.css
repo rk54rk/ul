@@ -27,10 +27,10 @@ ul is based on Underscores http://underscores.me/, (C) 2012-2015 Automattic, Inc
 #content{margin-top:50px;}
 
 /*typography*/
-body, html{font-family: 'Trocchi', serif;}
-span, p{font-size:14px;font-weight:normal;color:#444;}
-a{color:#444;}
-h1, h2, h3, h4, h5, h6{font-weight:normal;color:#444;line-height: 1.4em;}
+body, html{font-family: 'Trocchi', serif;overflow-x:hidden;background-color:rgba(0,0,0,0.02);}
+span, p{font-size:16px;font-weight:normal;color:#444;}
+a{color:#444;font-size:16px;}
+h1, h2, h3, h4, h5, h6{font-weight:normal;color:#444;line-height: 1.2em;}
 
 /*navbar*/
 .navbar-top{height:25px;min-height:25px;background-color:transparent;border-bottom:none;margin-top:25px}

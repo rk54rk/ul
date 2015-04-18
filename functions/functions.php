@@ -1,9 +1,10 @@
 <?php
 
+
 //export paypal balance to a file.
 function ul_balance_update_static(){
     //var data = '{ "value" : "£0.00" }';
-    $content = "var data = '{ %22value%22 : %22£".get_paypal_balance()."%22 }'";
+    $content = "var display_type = '{ %22value%22 : %22£".get_paypal_balance()."%22 }'";
     $path = ABSPATH.'wp-content/themes/ul/parts/facevalue/data.js';
     file_put_contents($path , rawurldecode($content));
 }

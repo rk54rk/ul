@@ -1,0 +1,8 @@
+.fv_char{float:left;}
+.fv_kerning{float:left;}
+.fv_pixel{box-shadow: 4px 4px 12px rgba(0,0,0,0.2);background-color: #EEE;position:absolute;}
+
+.on{background-size: cover;background-color: #FFF;}
+.off{box-shadow: none;}
+.fv_bigpic{position:absolute;width:250px;height:250px;background-size: cover;display:none;background-color:white;box-shadow: 8px 8px 24px rgba(0,0,0,0.2);}
+.fv_pixel:hover .fv_bigpic{display:block;}

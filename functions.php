@@ -19,6 +19,7 @@ function wpbootstrap_scripts_with_jquery()
 {
     // Register the script like this for a theme:
     wp_enqueue_script( 'bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js', array( 'jquery' ) );
+    wp_enqueue_script( 'auto-scroll', get_template_directory_uri() . '/js/autoscroll.js', array(), '1.0.0', true );
 }
 
 add_action( 'wp_enqueue_scripts', 'wpbootstrap_scripts_with_jquery' );
