@@ -35,11 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image'])) {
       // add new database entry, get the id of the entry.
       $title = $_POST['title'];
       $link = $_POST['link'];
-      $id_new = ul_ad_add($title, $link, 'jpg');
+      $ad_id = ul_ad_add($title, $link, 'jpg');
         
       /* resize and save images */
-      $file_S = ul_ad_saveimg($id_new, $title, 'jpg', 's');
-      $file_L = ul_ad_saveimg($id_new, $title, 'jpg', 'l');
+      $file_S = ul_ad_saveimg($ad_id, $title, 'jpg', 's');
+      $file_L = ul_ad_saveimg($ad_id, $title, 'jpg', 'l');
       
       
       // show second screen: confirmation page and Paypal button.
@@ -57,16 +57,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image'])) {
         
         <br><br>
         
-        <div class="ad-img-l" style="height:250px;width:250px;box-shadow: 8px 8px 24px rgba(0,0,0,0.2);background-size:cover;background-image: url('<?php echo $file_L;?>')"></div>
+        <img src="<?php echo $file_L;?>" class="ad-img-l" style="display:inline;box-shadow: 8px 8px 24px rgba(0,0,0,0.2);"></img>
         
         <br><br>
     
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
         <input type="hidden" name="cmd" value="_s-xclick">
         <input type="hidden" name="hosted_button_id" value="ZMU5DJ72YCE9N">
+        <input type="hidden" name="custom" value="<?php echo $ad_id;?>"/>
         <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_paynow_SM.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
         <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
         </form>
+
     </div>
     
     
@@ -101,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image'])) {
           </div>
             
           <div class="form-group">            
-              <label><span>Advertising image, recommond jpeg/png 600 x 600 px, max size 500kb</span></label>
+              <label><span>Advertising image, recommond jpeg/png maximum 300px on either side, max file size 500kb</span></label>
               <input type="file" name="image" accept="image/*" />
           </div>
             

@@ -7,6 +7,10 @@ var left_margin = 2;
 var top_margin = 4;
 var show_grid = false;
 var show_ads = true;
+var no_popup_zone1 = [4, 24, 31, 40]; //column1, column2, row1, row2
+var no_popup_zone2 = [4, 12, 27, 29]; //column1, column2, row1, row2
+var no_popup_zone3 = [4, 12, 0, 2]; //column1, column2, row1, row2
+var popup_on_load = 50; //how many random ad on page load?
 
 //declearing variables
 var ad_count = 0;
@@ -27,9 +31,10 @@ jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data_ad.json", function (ad
         fv_calculate_dots(font);
         fv_render(font, ads);
         
-        for (i=1; i<50; i++){fv_popup_random_ad(ads);}
+        for (i=1; i<popup_on_load; i++){fv_popup_random_ad(ads);}
         
-
+        render_matrix = null;
+        grid = null;
     });
 });
 
@@ -152,15 +157,25 @@ function fv_popup_random_ad(ads){
     var bigpic_path = '/wp-content/uploads/ad/' + ads[ad_count].bigpic;
     var ad_link = ads[ad_count].link;
     
-    console.log(coordinate);
-    
     output = "";
-    output = output_ad(thumbnail_path, bigpic_path, ad_link, coordinate);
+    
+    if (fv_no_popup_zone(no_popup_zone1[0], no_popup_zone1[1], no_popup_zone1[2], no_popup_zone1[3], coordinate[0], coordinate[1]) == false && fv_no_popup_zone(no_popup_zone2[0], no_popup_zone2[1], no_popup_zone2[2], no_popup_zone2[3], coordinate[0], coordinate[1]) == false && fv_no_popup_zone(no_popup_zone3[0], no_popup_zone3[1], no_popup_zone3[2], no_popup_zone3[3], coordinate[0], coordinate[1]) == false){
+        output = output_ad(thumbnail_path, bigpic_path, ad_link, coordinate);
+    }
     
 	displayport.innerHTML = displayport.innerHTML + output;
 }
 
 
+
+// set a area free of popup ads.
+function fv_no_popup_zone(column1, column2, row1, row2, x, y){
+    if (column1 <= x && x <= column2 && row1 <= y && y <= row2){
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 
@@ -171,7 +186,7 @@ function fv_popup_random_ad(ads){
 //output html of a dot
 function output_ad(thumbnail_path, bigpic_path, ad_link, coordinate){
     
-    output = output + "<div class='fv_dot' style='left:" + coordinate[0] * grid_unit_size + "px;top:" + coordinate[1] * grid_unit_size + "px;background-image:url(" + thumbnail_path + ")'><a href='" + ad_link + "' target='_blank'><div class='fv_bigpic' style='background-image:url(" + bigpic_path + ")'></div></a></div>";
+    output = output + "<div class='fv_dot' style='left:" + coordinate[0] * grid_unit_size + "px;top:" + coordinate[1] * grid_unit_size + "px;background-image:url(" + thumbnail_path + ")'><a href='" + ad_link + "' target='_blank'><img class='fv_bigpic' src='" + bigpic_path + "'></img></a></div>";
     return output;
 }
 
@@ -187,11 +202,6 @@ function fv_show_grid(){
 }
 
 
-
-//diff function for comparing array grid and render_matrix
-Array.prototype.diff = function(a) {
-    return this.filter(function(i) {return a.indexOf(i) < 0;});
-};
 
 // a looper for looping entries inside data_ad.json across every rendering dots.
 function counter(length){

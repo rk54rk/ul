@@ -22,7 +22,9 @@ function ul_ad_data_get($entries){
     
     $results = $wpdb->get_results( 
 	"  
-    SELECT * FROM ul_ad
+    SELECT ID, title, link, thumbnail, bigpic
+    FROM ul_ad
+    WHERE status = 'paid'
     ORDER BY ID DESC
     LIMIT $entries;
 	",

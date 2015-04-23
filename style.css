@@ -18,36 +18,32 @@ ul is based on Underscores http://underscores.me/, (C) 2012-2015 Automattic, Inc
 
 /*overall*/
 #colophon{text-align:center;}
-#page-gradient{min-height:25vh;border:none;pointer-events: none;
-  background: -webkit-linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1)); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1)); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1)); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1)); /* Standard syntax */
-}
 #content{margin-top:50px;}
 
 /*typography*/
-body, html{font-family: 'Trocchi', serif;overflow-x:hidden;background-color:rgba(0,0,0,0.02);}
-span, p{font-size:16px;font-weight:normal;color:#444;}
-a{color:#444;font-size:16px;}
+body, html{font-family: 'Trocchi', serif;overflow-x:hidden;background-color:#EEE}
+span, p{font-size:18px;font-weight:normal;color:#444;}
+a{color:#444;font-size:18px;}
 h1, h2, h3, h4, h5, h6{font-weight:normal;color:#444;line-height: 1.2em;}
 
 /*navbar*/
 .navbar-top{height:25px;min-height:25px;background-color:transparent;border-bottom:none;margin-top:25px}
 .navbar a{color:#444;}
-nav {
-  background: -webkit-linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1), rgba(255,255,192,0)); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1), rgba(255,255,192,0)); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1), rgba(255,255,192,0)); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(rgba(255,255,192,0), rgba(255,255,192,1), rgba(255,255,192,0)); /* Standard syntax */
-}
 ul.navbar-right{list-style:none;}
 ul.navbar-right li{margin-left:20px;}
 ul.navbar-right>li>a{color:#444!important;}
+.dropdown{margin-left:30px!important;margin-top:3px;}
 
-.navbar-nav .dropdown-menu{margin-top:25px;border:none;background-color:rgba(255,255,192,1);text-align: right;box-shadow: none;padding-top:5px;}
-.navbar-nav .dropdown-menu li a{padding:5px 0;}
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover{background-color:transparent;}
+
+.navbar-block a{padding:0px!important;border-bottom:2px solid #444;}
+.navbar-block a:hover, .navbar-block a:focus{text-decoration: none; padding:0;}
+
+/*navbar menu items*/
+.navbar-nav .dropdown-menu{margin-left:-15px;margin-top:15px!important;border:none;background-color:rgba(255,255,192,1);text-align:left;box-shadow: none;padding:30px 30px 30px 0px!important;border-radius:0;min-width:230px}
+.navbar-nav .dropdown-menu li a{padding:5px 0;}
+.navbar .dropdown-menu li{margin-left:15px}
+.navbar .dropdown-menu a:hover{background-color:#FFF;}
 
 /*ad*/
 .ad-img-s{}

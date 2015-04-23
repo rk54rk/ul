@@ -11,7 +11,7 @@ require('../../../../wp-blog-header.php');
 // Set this to 0 once you go live or don't require logging.
 define("DEBUG", 1);
 // Set to 0 once you're ready to go live
-define("USE_SANDBOX", 1);
+define("USE_SANDBOX", 0);
 define("LOG_FILE", "./ipn.log");
 
 
@@ -111,20 +111,18 @@ if (strcmp ($res, "VERIFIED") == 0) {
 	// assign posted variables to local variables
 	//$item_name = $_POST['item_name'];
 	//$item_number = $_POST['item_number'];
-	//$payment_status = $_POST['payment_status'];
+	$payment_status = $_POST['payment_status'];
 	$payment_amount = $_POST['mc_gross'];
 	//$payment_currency = $_POST['mc_currency'];
 	$txn_id = $_POST['txn_id'];
 	//$receiver_email = $_POST['receiver_email'];
 	$payer_email = $_POST['payer_email'];
+    $ad_id = $_POST['custom'];
 	
-    /* UL processing, update database */
-    ul_paypal_paid($payment_amount, $payer_email, $txn_id);
-
-    // generate a static ad file for Facevalue viewings
-   
-    ul_ad_data_update_static();
-
+    //validating transaction
+    if ($payment_status == 'Completed'){
+        ul_paypal_paid($ad_id, $payer_email, $txn_id);
+    }
     
 	if(DEBUG == true) {
 		error_log(date('[Y-m-d H:i e] '). "Verified IPN: $req ". PHP_EOL, 3, LOG_FILE);
@@ -135,6 +133,34 @@ if (strcmp ($res, "VERIFIED") == 0) {
 	if(DEBUG == true) {
 		error_log(date('[Y-m-d H:i e] '). "Invalid IPN: $req" . PHP_EOL, 3, LOG_FILE);
 	}
+}
+
+
+//processing ul_ad database for payment
+function ul_paypal_paid($ad_id, $payer_email, $txn_id){
+    global $wpdb;
+    $wpdb->update( 
+        'ul_ad', 
+        array(
+            'payer_email' => $payer_email,
+            'txn_id' => $txn_id,
+            'status' => 'paid'
+        ), 
+        array(
+            'ID' => $ad_id
+        ), 
+        array( 
+            '%s',
+            '%s',
+            '%s'
+        ), array(
+            '%d'
+        )
+    );
+    
+    //generate static JSON files for displaying front page
+    ul_ad_data_update_static();
+    ul_balance_update_static();
 }
 
 ?>

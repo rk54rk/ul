@@ -1,1 +1,0 @@
-var display_type = '{ "value" : "£0.00" }'
