@@ -26,11 +26,13 @@ var render_matrix = [];
 //Load JSON files
 jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data_ad.json", function (ads) {
     jQuery.getJSON("wp-content/themes/ul/parts/facevalue/font.json", function (font) {
-    
+        
+        console.log(font);
+        
         fv_init(font);
         fv_calculate_dots(font);
         fv_render(font, ads);
-        
+
         for (i=1; i<popup_on_load; i++){fv_popup_random_ad(ads);}
         
         render_matrix = null;
@@ -46,6 +48,8 @@ function fv_init(font){
     for (i = 0; i < display_type.value.length; i++){
         //for each character
         var current_char = display_type_characters[i];
+        console.log(current_char);
+        console.log(font.characters[current_char]);
         columns = columns + font.characters[current_char].character_width;
         rows = font.info.font_height; 
     }

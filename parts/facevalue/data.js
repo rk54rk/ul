@@ -1,1 +1,1 @@
-var display_type = '{ "value" : "£0.00" }'
+var display_type = '{ "value" : "£9.89" }'
