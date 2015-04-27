@@ -5,8 +5,5 @@
     </div>
 </div>
 
-
-<script src="<?php bloginfo('template_directory'); ?>/parts/facevalue/data.js"></script>
-
 <script src="<?php bloginfo('template_directory'); ?>/parts/facevalue/facevalue.js"></script>
 

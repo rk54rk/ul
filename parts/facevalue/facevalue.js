@@ -1,6 +1,5 @@
 var displayport = document.getElementById('facevalue');
-var display_type = JSON.parse(display_type);
-var display_type_characters = display_type.value.split("");
+
 
 //settings, canvas margin and show grid for debugging
 var left_margin = 2;
@@ -20,23 +19,27 @@ var rows = 0;
 var output = "";
 var grid = [];
 var render_matrix = [];
+var display_type = "";
+var display_type_characters = "";
 
 
-
-//Load JSON files
+//Load JSON files, main process inside
 jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data_ad.json", function (ads) {
     jQuery.getJSON("wp-content/themes/ul/parts/facevalue/font.json", function (font) {
-        
-        console.log(font);
-        
-        fv_init(font);
-        fv_calculate_dots(font);
-        fv_render(font, ads);
+        jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data.json", function (data) {
+            
+            display_type = data.value;
+            display_type_characters = display_type.split("");
 
-        for (i=1; i<popup_on_load; i++){fv_popup_random_ad(ads);}
-        
-        render_matrix = null;
-        grid = null;
+            fv_init(font);
+            fv_calculate_dots(font);
+            fv_render(font, ads);
+
+            for (i=1; i<popup_on_load; i++){fv_popup_random_ad(ads);}
+
+            render_matrix = null;
+            grid = null;
+        });
     });
 });
 
@@ -45,11 +48,9 @@ jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data_ad.json", function (ad
 function fv_init(font){
 //get total number of columns and rows of grid units of the type (not including margins)
 
-    for (i = 0; i < display_type.value.length; i++){
+    for (i = 0; i < display_type.length; i++){
         //for each character
         var current_char = display_type_characters[i];
-        console.log(current_char);
-        console.log(font.characters[current_char]);
         columns = columns + font.characters[current_char].character_width;
         rows = font.info.font_height; 
     }
@@ -82,7 +83,7 @@ function fv_calculate_dots(font){
     var current_column = left_margin;   
     
     
-    for (i = 0; i < display_type.value.length; i++){
+    for (i = 0; i < display_type.length; i++){
     //for each character of the display type string
         var current_char = display_type_characters[i];
         
