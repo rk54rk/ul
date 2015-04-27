@@ -31,16 +31,19 @@
             <div class="navbar-header navbar-block">
 			  <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
             </div>
-            <ul class="nav navbar-nav navbar-left navbar-block">
+              
+            <ul class="nav navbar-nav navbar-left">
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                      <div style="padding-bottom:1px"><span>Menu</span></div>
-                    </a>
+                    
+                  <a href="#" class="dropdown-toggle with-border" data-toggle="dropdown" role="button" aria-expanded="false" style="border:2px solid #444;padding:3px 6px;margin-top:-3px;margin-left:30px;" >
+                      <span>Menu</span>
+                  </a>
+                    
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="#" onclick="home_autoscroll()">About</a></li>
                     <li><a href="<?php echo site_url( '/buy', 'http' ); ?>">Buy an ad</a></li>
                     <li><a href="#">Join the company</a></li>
-                    <li><a href="#">Boardroom</a></li>
+                    <li><a href="http://hq.unlimitedltd.co">Headquarters</a></li>
                   </ul>
                 </li>
               </ul>
