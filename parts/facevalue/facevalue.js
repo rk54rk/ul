@@ -28,7 +28,7 @@ jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data_ad.json", function (ad
     jQuery.getJSON("wp-content/themes/ul/parts/facevalue/font.json", function (font) {
         jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data.json", function (data) {
             
-            display_type = data.value;
+            display_type = data.type;
             display_type_characters = display_type.split("");
 
             fv_init(font);

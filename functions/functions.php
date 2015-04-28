@@ -3,8 +3,8 @@
 
 //export paypal balance to a file.
 function ul_balance_update_static(){
-    //var data = '{ "value" : "£0.00" }';
-    $content = "{ %22value%22 : %22£".get_paypal_balance()."%22 }";
+    $balance = get_paypal_balance();
+    $content = "{ %22type%22 : %22£".$balance."%22, %22value%22 : %22".$balance."%22}";
     $path = ABSPATH.'wp-content/themes/ul/parts/facevalue/data.json';
     file_put_contents($path , rawurldecode($content));
 }
