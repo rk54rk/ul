@@ -12,34 +12,37 @@
 
 get_header();?>
 
-<div class="page-title">Buy advertising</div>
-
 <div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+    
     <div>
     <br><br>
-    Here you can pay GBP 10 to put up a new advert on the front page of Unlimited Ltd.
+    Here you can pay £1 to put up a new advert on the front page of Unlimited Ltd.
     <br><br>
     </div>
 
 <?php
 // image uploader settings
 $max_file_size = 1024*500; // 500kb
-$valid_exts = array('jpeg', 'jpg', 'png', 'gif');
+$valid_exts = array('jpeg', 'jpg', 'png');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image']) AND isset($_FILES['thumbnail']) ) {
   if( $_FILES['image']['size'] < $max_file_size ){
     // get file extension
-    $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
-    if (in_array($ext, $valid_exts)) {
+    $ext_l = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+    $ext_s = strtolower(pathinfo($_FILES['thumbnail']['name'], PATHINFO_EXTENSION));
+      
+    if (in_array($ext_l, $valid_exts) && in_array($ext_s, $valid_exts)) {
         
       // add new database entry, get the id of the entry.
       $title = $_POST['title'];
       $link = $_POST['link'];
-      $ad_id = ul_ad_add($title, $link, 'jpg');
+      $ad_id = ul_ad_add($title, $link, $business, $ext_l, $ext_s);
         
       /* resize and save images */
-      $file_S = ul_ad_saveimg($ad_id, $title, 'jpg', 's');
-      $file_L = ul_ad_saveimg($ad_id, $title, 'jpg', 'l');
+      $file_L = ul_ad_saveimg($ad_id, $title, 'image', $ext_l, 'l');
+      $file_S = ul_ad_saveimg($ad_id, $title, 'thumbnail', $ext_s, 's');
       
       
       // show second screen: confirmation page and Paypal button.
@@ -77,9 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image'])) {
       $msg = 'Unsupported file';
     }
   } else{
-    $msg = 'Please upload image smaller than 500KB';
+    $msg = 'The files should each be smaller than 500KB';
   }
 
+} else {
+    
 }
 
 ?>
@@ -87,30 +92,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image'])) {
     <?php if(isset($msg)){echo $msg; echo '<br><br><br>';} ?>
     
     <div id="add-ad-1"> 
-        Step 1: Basic information
+        Step 1: fill this form
         <form action="" method="post" enctype="multipart/form-data">
             
           <div class="form-group">
-            <label for="inputTitle">Advertising title</label>
-            <input class="form-control" name="title" placeholder="Enter title">
+            <label for="inputText">Advertising title</label>
+              <input class="form-control" name="title" placeholder="">
           </div>
             
           <div class="form-group">
-            <label for="exampleInputEmail1">Advertised link</label>
-            <div>
-                <span>http:// </span><input style="width:90%;display:inline" class="form-control" name="link" placeholder="Enter URL">
+            <label for="link">Advertised link</label>
+            <div class="input-group">
+                <div class="input-group-addon">http://</div>
+                <input class="form-control" name="link" placeholder="">
             </div>
           </div>
             
           <div class="form-group">            
-              <label><span>Advertising image, recommond jpeg/png maximum 300px on either side, max file size 500kb</span></label>
+              <label>Thumbnail which will show on the circular icons, recommond jpg/jpeg/png.</label>
+              <input type="file" name="thumbnail" accept="image/*" />
+          </div>
+            
+          <div class="form-group">            
+              <label>Main advertising image, recommond jpg/jpeg/png, max file size 500kb</label>
               <input type="file" name="image" accept="image/*" />
+          </div>
+            
+            
+          <div class="form-group">
+            <label for="inputBusiness">Your business name</label>
+            <input class="form-control" name="business" placeholder="Your business name">
           </div>
             
           <input type="submit" value="Next step" />
         </form>        
     </div>
-
+        
+        </div>
+    </div>
 </div>
 
 <?php get_footer(); ?>

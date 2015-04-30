@@ -1,14 +1,16 @@
 <?php
 
-function ul_ad_add($title, $link, $ext){
+function ul_ad_add($title, $link, $business, $ext_l, $ext_s){
     global $wpdb;
     $wpdb->insert( 
         'ul_ad', 
         array( 
             'title' => $title,
             'link' => 'http://'.$link,
+            'business_name' => $business
         ), 
         array( 
+            '%s',
             '%s',
             '%s'
         ) 
@@ -19,8 +21,8 @@ function ul_ad_add($title, $link, $ext){
     $wpdb->update( 
         'ul_ad', 
         array( 
-            'thumbnail' => date('Y').'/'.$id_new.'_'.str_replace(' ', '-', $title).'_s.'.$ext,
-            'bigpic' => date('Y').'/'.$id_new.'_'.str_replace(' ', '-', $title).'_l.'.$ext
+            'thumbnail' => date('Y').'/'.$id_new.'_'.str_replace(' ', '-', $title).'_s.'.$ext_s,
+            'bigpic' => date('Y').'/'.$id_new.'_'.str_replace(' ', '-', $title).'_l.'.$ext_l
         ), 
         array( 'ID' => $id_new ), 
         array( 
@@ -34,7 +36,7 @@ function ul_ad_add($title, $link, $ext){
 }
 
 
-function ul_ad_saveimg($id_new, $title, $ext, $size){
+function ul_ad_saveimg($id_new, $title, $uploader_name, $ext, $size){
   //define sizes
   if ($size == 'l'){
       //max height and width. for size l keep the w/h ratio
@@ -45,7 +47,7 @@ function ul_ad_saveimg($id_new, $title, $ext, $size){
   }
     
   /* Get original image x y*/
-  list($w, $h) = getimagesize($_FILES['image']['tmp_name']);
+  list($w, $h) = getimagesize($_FILES[$uploader_name]['tmp_name']);
   /* calculate new image size */
     if ($size == 's'){
     // for thumbnail, crop to the center
@@ -77,7 +79,7 @@ function ul_ad_saveimg($id_new, $title, $ext, $size){
   /* new file name */
   $path = ABSPATH . 'wp-content/uploads/ad/'.date('Y').'/'.$id_new.'_'.str_replace(' ', '-', $title).'_'.$size.'.'.$ext;
   /* read binary data from image file */
-  $imgString = file_get_contents($_FILES['image']['tmp_name']);
+  $imgString = file_get_contents($_FILES[$uploader_name]['tmp_name']);
   /* create image from string */
   $image = imagecreatefromstring($imgString);
   $tmp = imagecreatetruecolor($width, $height);
@@ -93,7 +95,7 @@ function ul_ad_saveimg($id_new, $title, $ext, $size){
     mkdir(ABSPATH . 'wp-content/uploads/ad/'.date('Y'), 0774, true);
   }
     
-  switch ($_FILES['image']['type']) {
+  switch ($_FILES[$uploader_name]['type']) {
     case 'image/jpeg':
       imagejpeg($tmp, $path, 90);
       break;

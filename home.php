@@ -10,6 +10,10 @@
  * @package ul
  */
 
+// refresh json files for development mode
+ul_ad_data_update_static();
+ul_balance_update_static();
+
 get_header(); ?>
 
 <div class="page-title"><span style="border-bottom:1px solid #444;"></span></div>
