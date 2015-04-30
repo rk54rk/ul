@@ -6,9 +6,7 @@ var left_margin = 2;
 var top_margin = 4;
 var show_grid = false;
 var show_ads = true;
-var no_popup_zone1 = [4, 24, 31, 40]; //column1, column2, row1, row2
-var no_popup_zone2 = [4, 12, 27, 29]; //column1, column2, row1, row2
-var no_popup_zone3 = [4, 12, 0, 2]; //column1, column2, row1, row2
+var no_popup_zone_setting = [0, 0.3, 0, 0.1]; //column1, column2, row1, row2, boundries of the zone, in percentage of window (now set to logo and menu)
 var popup_on_load = 50; //how many random ad on page load?
 
 //declearing variables
@@ -21,6 +19,12 @@ var grid = [];
 var render_matrix = [];
 var display_type = "";
 var display_type_characters = "";
+
+//setting constants
+var window_width = jQuery(window).width();
+var window_height = jQuery(window).height();
+//translate no popup zone setting into pixels
+var no_popup_zone1 = [Math.ceil(no_popup_zone_setting[0]*window_width), Math.ceil(no_popup_zone_setting[1]*window_width), Math.ceil(no_popup_zone_setting[2]*window_height), Math.ceil(no_popup_zone_setting[3]*window_height) ];
 
 
 //Load JSON files, main process inside
@@ -81,7 +85,10 @@ function fv_init(font){
 //generate an array of 'on' dots
 function fv_calculate_dots(font){
     var current_column = left_margin;   
-    
+        
+    //calculate top_offset, in order to vertically center the type artwork
+    var top_offset = Math.floor((window_height / grid_unit_size - font.info.font_height) / 2);
+    console.log(top_offset);
     
     for (i = 0; i < display_type.length; i++){
     //for each character of the display type string
@@ -96,7 +103,7 @@ function fv_calculate_dots(font){
             //add 'current column' offset to x, add margin to y.
 
             new_dot[0] = current_dot[0] + current_column;
-            new_dot[1] = current_dot[1] + top_margin;  
+            new_dot[1] = current_dot[1] + top_offset;  
             
             //add dot coordinate to dot_matrix
             render_matrix.push(new_dot);
@@ -164,7 +171,8 @@ function fv_popup_random_ad(ads){
     
     output = "";
     
-    if (fv_no_popup_zone(no_popup_zone1[0], no_popup_zone1[1], no_popup_zone1[2], no_popup_zone1[3], coordinate[0], coordinate[1]) == false && fv_no_popup_zone(no_popup_zone2[0], no_popup_zone2[1], no_popup_zone2[2], no_popup_zone2[3], coordinate[0], coordinate[1]) == false && fv_no_popup_zone(no_popup_zone3[0], no_popup_zone3[1], no_popup_zone3[2], no_popup_zone3[3], coordinate[0], coordinate[1]) == false){
+    //is the random dot in the no popup zone?
+    if (fv_no_popup_zone(no_popup_zone1[0], no_popup_zone1[1], no_popup_zone1[2], no_popup_zone1[3], coordinate[0], coordinate[1]) == false){
         output = output_ad(thumbnail_path, bigpic_path, ad_link, coordinate);
     }
     
@@ -175,8 +183,13 @@ function fv_popup_random_ad(ads){
 
 // set a area free of popup ads.
 function fv_no_popup_zone(column1, column2, row1, row2, x, y){
-    if (column1 <= x && x <= column2 && row1 <= y && y <= row2){
+    if (column1 <= x * grid_unit_size && 
+        x * grid_unit_size <= column2 && 
+        row1 <= y * grid_unit_size && 
+        y * grid_unit_size <= row2)
+    {
         return true;
+        
     } else {
         return false;
     }
