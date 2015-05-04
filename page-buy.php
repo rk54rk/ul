@@ -13,14 +13,19 @@
 get_header();?>
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-    
-    <div>
-    <br><br>
-    Here you can pay £1 to put up a new advert on the front page of Unlimited Ltd.
-    <br><br>
-    </div>
+<div class="row">
+        
+<!--description-->
+<div class="col-sm-6" style="padding-right:100px;">
+    <h2 style="margin-top:-4px">Buy our front page advertising</h2>
+    <p>Here you can put up a new advert on the front page of Unlimited Limited. Currently we charge £1 per advertising.</p>
+    <p>Our front page will only display 50 latest advertisings. That means your ad could be replaced by new ones after a while, however it will be stored in our archive indefinately.</p>
+    <p>You ad could also randomly appear on the printed matters of the Unlimited Limited.</p>
+</div>
+        
+        
+<!--buy ad forms, 2 steps-->
+<div class="col-sm-6">
 
 <?php
 // image uploader settings
@@ -52,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image']) AND isset($
     </style>
     
     <div id="add-ad-2"> 
-        Step 2: Confirmation
+        <h4>Step 2: Confirmation</h4>
         
         <br><br>
         
@@ -92,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image']) AND isset($
     <?php if(isset($msg)){echo $msg; echo '<br><br><br>';} ?>
     
     <div id="add-ad-1"> 
-        Step 1: fill this form
+        <h4>Step 1: create advertising</h4>
         <form action="" method="post" enctype="multipart/form-data">
             
           <div class="form-group">
@@ -114,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image']) AND isset($
           </div>
             
           <div class="form-group">            
-              <label>Main advertising image, recommond jpg/jpeg/png, max file size 500kb</label>
+              <label>Big advertising image, recommond jpg/jpeg/png, max file size 500kb</label>
               <input type="file" name="image" accept="image/*" />
           </div>
             

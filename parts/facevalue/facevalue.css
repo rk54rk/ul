@@ -5,7 +5,7 @@
 .on{background-size: cover;background-color: #FFF;}
 .off{box-shadow: none;}
 
-.fv_bigpic{position:absolute;display:none;background-color:white;box-shadow: 8px 8px 24px rgba(0,0,0,0.2);z-index: 1000;}
+.fv_bigpic{position:absolute;display:none;background-color:white;box-shadow: 8px 8px 24px rgba(0,0,0,0.2);z-index: 1000;pointer-events:none;}
 .fv_dot:hover .fv_bigpic{display:block;}
 
 .fv_caption{position:absolute;top:-25px;width:200px;display:none;background-color:white;box-shadow: 8px 8px 24px rgba(0,0,0,0.2);z-index: 999;}

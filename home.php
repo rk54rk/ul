@@ -16,9 +16,13 @@
 
 get_header(); ?>
 
-<div class="page-title"><span style="border-bottom:1px solid #444;"></span></div>
+<!--reserved button for view all ads-->
+<div class="container">
+    <a href="<?php echo site_url( '/all-ads', 'http' ); ?>" class="dropdown-toggle"><span class="with-border home-button">All ads</span></a>
+    <a href="#" onclick="home_autoscroll()" class="dropdown-toggle"><span class="with-border home-button">About</span></a>
+</div>
 
-<div class="container-fluid" style="min-height:100vh">
+<div class="container-fluid" style="min-height:100vh;">
 	<div class="row">
         <div style="height:30px;"></div>
 
@@ -29,18 +33,18 @@ get_header(); ?>
 </div>
 
 
-<div class="container-fluid" style="min-height:100vh;background-color:#FFFFC0;z-index:-1;">
+<div class="container-fluid" style="min-height:100vh;background-color:#FFFFC0;overflow:hidden;">
 	<div class="row">
-    	<div class="container">
+    	<div class="container" style="pointer-event:none;">
             <div class="row">
                 <div class="col-sm-6" style="height:100px;"></div>
             </div>
             <div class="row">
-                <div class="col-sm-6" style="background-color:#FFFFC0;box-shadow:0 0 20px 20px #FFFFC0">
+                <div class="col-sm-6" style="background-color:#FFFFC0;box-shadow:0 0 20px 20px #FFFFC0;margin-top:-100px;padding-top:100px">
                     
-                    <p style="text-align:left">The Unlimited Limited is a venture communist corporation, or an austere capitalist commune. It makes revenue from advertisement, then distribute the wealth and power equally to each share holder of the company, or inhabitant of the community.</h3>
-                    <p>The total value of the company: £0.00<br>Total share holders: 1 <br>Each one have of the company:£0.00</p>
-                    <p>Click here to sign up as a share holder.</p>
+                    <p style="text-align:left">Unlimited Limited is a venture communist corporation, or an austere capitalist commune. It is a light hearted experiment on the form and organization of a business. Making revenue from advertisement, it then distribute the wealth and power equally to its shareholders. By voting in the <a href="http://hq.unlimitedltd.co">headquarters</a>, daily running and future venture of the company are decided.</p>
+                    <p>Anyone can <a href="http://hq.unlimitedltd.co/signup">sign up</a> as a shareholder here for free.</p>
+                    <A name="about"></A>
                 </div>
             </div>
         </div>

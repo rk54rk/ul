@@ -204,7 +204,7 @@ function fv_no_popup_zone(column1, column2, row1, row2, x, y){
 //output html of a dot
 function output_ad(thumbnail_path, bigpic_path, ad_link, coordinate){
     
-    output = output + "<div class='fv_dot' style='left:" + coordinate[0] * grid_unit_size + "px;top:" + coordinate[1] * grid_unit_size + "px;background-image:url(" + thumbnail_path + ")'><a href='" + ad_link + "' target='_blank'><img class='fv_bigpic' src='" + bigpic_path + "'></img></a></div>";
+    output = output + "<a href='" + ad_link + "' target='_blank'><div class='fv_dot' style='left:" + coordinate[0] * grid_unit_size + "px;top:" + coordinate[1] * grid_unit_size + "px;background-image:url(" + thumbnail_path + ")'><img class='fv_bigpic' src='" + bigpic_path + "'></img></div></a>";
     return output;
 }
 

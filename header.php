@@ -26,7 +26,7 @@
 <div id="page" class="hfeed site">
 
 	<header id="masthead" class="site-header" role="banner">        
-        <nav class="navbar-top navbar navbar-default navbar-fixed-top" style="z-index:9999;">
+        <nav class="navbar-top navbar navbar-default navbar-fixed-top" style="z-index:999;">
           <div class="container">
             <div class="navbar-header navbar-block">
 			  <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
@@ -40,9 +40,9 @@
                   </a>
                     
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="#" onclick="home_autoscroll()">About</a></li>
+                    <li><a href="<?php echo site_url( '/#about', 'http' ); ?>">About</a></li>
                     <li><a href="<?php echo site_url( '/buy', 'http' ); ?>">Buy an ad</a></li>
-                    <li><a href="#">Join the company</a></li>
+                    <li><a href="http://hq.unlimitedltd.co/signup">Join the company</a></li>
                     <li><a href="http://hq.unlimitedltd.co">Headquarters</a></li>
                   </ul>
                 </li>
