@@ -18,6 +18,8 @@
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/inc/bootstrap.min.css">
 <!-- Google fonts -->
 <link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'>
+<!-- Favicon -->
+<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/favicon.png" />
 
 <?php wp_head(); ?>
 </head>

@@ -21,8 +21,8 @@ function ul_ad_add($title, $link, $business, $ext_l, $ext_s){
     $wpdb->update( 
         'ul_ad', 
         array( 
-            'thumbnail' => date('Y').'/'.$id_new.'_'.str_replace(' ', '-', $title).'_s.'.$ext_s,
-            'bigpic' => date('Y').'/'.$id_new.'_'.str_replace(' ', '-', $title).'_l.'.$ext_l
+            'thumbnail' => date('Y').'/'.$id_new.'_s.'.$ext_s,
+            'bigpic' => date('Y').'/'.$id_new.'_l.'.$ext_l
         ), 
         array( 'ID' => $id_new ), 
         array( 
@@ -77,7 +77,7 @@ function ul_ad_saveimg($id_new, $title, $uploader_name, $ext, $size){
     
 
   /* new file name */
-  $path = ABSPATH . 'wp-content/uploads/ad/'.date('Y').'/'.$id_new.'_'.str_replace(' ', '-', $title).'_'.$size.'.'.$ext;
+  $path = ABSPATH . 'wp-content/uploads/ad/'.date('Y').'/'.$id_new.'_'.$size.'.'.$ext;
   /* read binary data from image file */
   $imgString = file_get_contents($_FILES[$uploader_name]['tmp_name']);
   /* create image from string */
@@ -114,7 +114,7 @@ function ul_ad_saveimg($id_new, $title, $uploader_name, $ext, $size){
   imagedestroy($image);
   imagedestroy($tmp);
 
-  $url = site_url() . '/wp-content/uploads/ad/'.date('Y').'/'.$id_new.'_'.str_replace(' ', '-', $title).'_'.$size.'.'.$ext;
+  $url = site_url() . '/wp-content/uploads/ad/'.date('Y').'/'.$id_new.'_'.$size.'.'.$ext;
   return $url;
     
 }

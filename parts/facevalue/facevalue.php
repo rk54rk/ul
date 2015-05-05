@@ -1,3 +1,7 @@
+<?php
+    ul_balance_update_static();
+?>
+
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/parts/facevalue/facevalue.css">
 
 <div class="row" style="overflow:hidden">
