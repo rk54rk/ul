@@ -42,8 +42,7 @@ get_header(); ?>
             <div class="row">
                 <div class="col-sm-6" style="background-color:#FFFFC0;box-shadow:0 0 20px 20px #FFFFC0;margin-top:-100px;padding-top:100px">
                     
-                    <p style="text-align:left">Unlimited Limited is a venture communist corporation, or an austere capitalist commune. It is an experiment on the form of the business organization. Making revenue from advertisement, it then distribute the wealth and power equally to its shareholders. Future ventures and daily running of the company are decided by voting in its <a href="http://hq.unlimitedltd.co">headquarters</a>.</p>
-                    <p>Anyone can <a href="http://hq.unlimitedltd.co/signup">sign up</a> as a shareholder here for free.</p>
+                    <p style="text-align:left">Unlimited Limited is a venture communist corporation, or an austere capitalist commune. It is an experiment on the form of the business organization. Making revenue from advertisement, it then distribute its humble wealth and power equally to its shareholders, which is open for anyone to <a href="http://hq.unlimitedltd.co/signup">sign up</a>, free of charge.</p>
                     <A name="about"></A>
                 </div>
             </div>

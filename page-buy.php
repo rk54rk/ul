@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image']) AND isset($
       // add new database entry, get the id of the entry.
       $title = $_POST['title'];
       $link = $_POST['link'];
+      $business = $_POST['business'];
       $ad_id = ul_ad_add($title, $link, $business, $ext_l, $ext_s);
         
       /* resize and save images */
