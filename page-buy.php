@@ -102,8 +102,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image']) AND isset($
         <form action="" method="post" enctype="multipart/form-data">
             
           <div class="form-group">
-            <label for="inputText">Advertising title</label>
+            <label for="inputText">Advertising title, 100 charaters max.</label>
               <input class="form-control" name="title" placeholder="">
+          </div>
+            
+          <div class="form-group">
+            <label for="inputBusiness">Your business name, 50 characters max.</label>
+            <input class="form-control" name="business" placeholder="Your business name">
           </div>
             
           <div class="form-group">
@@ -122,12 +127,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image']) AND isset($
           <div class="form-group">            
               <label>Big advertising image, recommond jpg/jpeg/png, max file size 500kb</label>
               <input type="file" name="image" accept="image/*" />
-          </div>
-            
-            
-          <div class="form-group">
-            <label for="inputBusiness">Your business name</label>
-            <input class="form-control" name="business" placeholder="Your business name">
           </div>
             
           <input type="submit" value="Next step" />

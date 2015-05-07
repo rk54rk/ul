@@ -18,8 +18,8 @@ get_header(); ?>
 
 <!--reserved button for view all ads-->
 <div class="container">
-    <a href="<?php echo site_url( '/all-ads', 'http' ); ?>" class="dropdown-toggle"><span class="with-border home-button">All ads</span></a>
-    <a href="#" onclick="home_autoscroll()" class="dropdown-toggle"><span class="with-border home-button">About</span></a>
+    <a href="<?php echo site_url( '/all-ads', 'http' ); ?>" class="dropdown-toggle"><span id="home-all-ads" class="with-border home-button">All ads</span></a>
+    <a href="#" onclick="home_autoscroll()" class="dropdown-toggle"><span id="home-about" class="with-border home-button">About</span></a>
 </div>
 
 <div class="container-fluid" style="min-height:100vh;">
@@ -40,9 +40,9 @@ get_header(); ?>
                 <div class="col-sm-6" style="height:100px;"></div>
             </div>
             <div class="row">
-                <div class="col-sm-6" style="background-color:#FFFFC0;box-shadow:0 0 20px 20px #FFFFC0;margin-top:-100px;padding-top:100px">
+                <div class="col-sm-6">
                     
-                    <p style="text-align:left">Unlimited Limited is a venture communist corporation, or an austere capitalist commune. It is an experiment on the form of the business organization. Making revenue from advertisement, it then distribute its humble wealth and power equally to its shareholders, which is open for anyone to <a href="http://hq.unlimitedltd.co/signup">sign up</a>, free of charge.</p>
+                    <p id="fv_home_text" style="text-align:left">Unlimited Limited is a venture communist corporation, or an austere capitalist commune. It is an experiment on the form of the business organization. Making revenue from advertisement, it then distribute its humble wealth and power equally to its shareholders, which is open for anyone to <a href="http://hq.unlimitedltd.co/signup" style="white-space:nowrap;">sign up</a>, free of charge.</p>
                     <A name="about"></A>
                 </div>
             </div>

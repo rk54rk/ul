@@ -5,51 +5,87 @@ var displayport = document.getElementById('facevalue');
 var left_margin = 2;
 var top_margin = 4;
 var show_grid = false;
-var show_ads = true;
-var no_popup_zone_setting = [0, 0.3, 0, 0.1]; //column1, column2, row1, row2, boundries of the zone, in percentage of window (now set to logo and menu)
 var popup_on_load = 50; //how many random ad on page load?
+var no_popup_areas = ['#fv_home_text', '#home-all-ads', '#home-about', '#navbar-logo', '#navbar-menu'];
+
 
 //declearing variables
-var ad_count = 0;
-var grid_unit_size = 0;
-var columns = 0;
-var rows = 0;
-var output = "";
-var grid = [];
-var render_matrix = [];
-var display_type = "";
-var display_type_characters = "";
-
-//setting constants
-var window_width = jQuery(window).width();
-var window_height = jQuery(window).height();
-//translate no popup zone setting into pixels
-var no_popup_zone1 = [Math.ceil(no_popup_zone_setting[0]*window_width), Math.ceil(no_popup_zone_setting[1]*window_width), Math.ceil(no_popup_zone_setting[2]*window_height), Math.ceil(no_popup_zone_setting[3]*window_height) ];
+var ad_count;
+var grid_unit_size;
+var columns;
+var rows;
+var grid;
+var render_matrix;
+var display_type;
+var display_type_characters;
+var window_width
+var window_height
 
 
-//Load JSON files, main process inside
-jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data_ad.json", function (ads) {
-    jQuery.getJSON("wp-content/themes/ul/parts/facevalue/font.json", function (font) {
-        jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data.json", function (data) {
+//render everything
+fv_init();
+fv_main();
+
+//when window is resized, refresh the page
+jQuery(window).bind('resize', function(e)
+{
+    window.resizeEvt;
+    jQuery(window).resize(function()
+    {
+        clearTimeout(window.resizeEvt);
+        window.resizeEvt = setTimeout(function()
+        {
             
-            display_type = data.type;
-            display_type_characters = display_type.split("");
-
-            fv_init(font);
-            fv_calculate_dots(font);
-            fv_render(font, ads);
-
-            for (i=1; i<popup_on_load; i++){fv_popup_random_ad(ads);}
-
-            render_matrix = null;
-            grid = null;
-        });
+            //render everything again
+            displayport.innerHTML = "";
+            fv_init();
+            fv_main();
+            
+        }, 250);
     });
 });
 
 
 
-function fv_init(font){
+
+
+
+function fv_init(){
+    ad_count = 0;
+    grid_unit_size = 0;
+    columns = 0;
+    rows = 0;
+    grid = [];
+    render_matrix = [];
+    display_type = "";
+    display_type_characters = "";
+    window_width = jQuery(window).width();
+    window_height = jQuery(window).height();
+}
+
+
+function fv_main(){
+    //Load JSON files, main process inside
+    jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data_ad.json", function (ads) {
+        jQuery.getJSON("wp-content/themes/ul/parts/facevalue/font.json", function (font) {
+            jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data.json", function (data) {
+
+                display_type = data.type;
+                display_type_characters = display_type.split("");
+
+                fv_setup_grid(font);
+                fv_calculate_dots(font);
+                fv_render(font, ads);
+
+                fv_popup_random_ad(ads, popup_on_load);
+
+            });
+        });
+    });
+}
+
+
+function fv_setup_grid(font){
 //get total number of columns and rows of grid units of the type (not including margins)
 
     for (i = 0; i < display_type.length; i++){
@@ -64,8 +100,6 @@ function fv_init(font){
     rows = rows + (top_margin*2);
   
 	//generate grid unit size css according to numbers of columns
-	var sheets = document.styleSheets;
-	var sheet = document.styleSheets[0];
 	grid_unit_size = (displayport.clientWidth) / (columns);
 	
     //generate the document grid as an array;
@@ -75,11 +109,11 @@ function fv_init(font){
             grid.push([x, y]);
         }
     }
-
+    
     //write CSS rules for the dots
-	sheet.insertRule(".fv_dot{height:" + grid_unit_size*2 + "px;width:" + grid_unit_size*2 + "px;border-radius: " + grid_unit_size + "px;}", 1);
+    jQuery('#addedCSS').remove();
+    jQuery('head').append('<style id="addedCSS" type="text/css">.fv_dot{height:' + grid_unit_size*2 + 'px;width:' + grid_unit_size*2 + 'px;border-radius: ' + grid_unit_size + 'px;}</style>');
 }
-
 
 
 //generate an array of 'on' dots
@@ -88,7 +122,6 @@ function fv_calculate_dots(font){
         
     //calculate top_offset, in order to vertically center the type artwork
     var top_offset = Math.floor((window_height / grid_unit_size - font.info.font_height) / 2);
-    console.log(top_offset);
     
     for (i = 0; i < display_type.length; i++){
     //for each character of the display type string
@@ -115,10 +148,10 @@ function fv_calculate_dots(font){
 }
 
 
-
 //output the render matrix and fill with ads.
 function fv_render(font, ads){
-
+    var output = "";
+    
     //display debug grid
     if (show_grid == true) {
         fv_show_grid();
@@ -135,84 +168,98 @@ function fv_render(font, ads){
         
         var ad_link = ads[ad_count].link;
         
-        //toggle ads for debug
-        if (show_ads == true){
-            
-            //output with ads
-            output = output_ad(title, bname, thumbnail_path, bigpic_path, ad_link, render_matrix[i]);
-            
-        } else {
-            
-            //output without ads for debug
-            output = output + "<div class='fv_dot' style='left:" + render_matrix[i][0] * grid_unit_size + "px;top:" + render_matrix[i][1] * grid_unit_size + "px;'></div>";
-        }
+        //output with ads
+        output = output + output_ad(title, bname, thumbnail_path, bigpic_path, ad_link, render_matrix[i]);
+
     }
 
 	displayport.innerHTML = output;
 }
 
 
-
 //pop up a random ad
-function fv_popup_random_ad(ads){
+function fv_popup_random_ad(ads, total_ads){
     
     //get the dots where is not rendered in type
-    
     var empty_space = [];
+    var output = "";
+    var output_one = "";
 
     jQuery.grep(grid, function(el) {
         if (jQuery.inArray(el, render_matrix) == -1) empty_space.push(el);
     });
     
+    for (i=0; i<total_ads; i++){
+        var coordinate = empty_space[Math.floor(Math.random() * empty_space.length)];
 
-    var coordinate = empty_space[Math.floor(Math.random() * empty_space.length)];
-    
-    var ad_count = counter(ads.length);
-    var thumbnail_path = '/wp-content/uploads/ad/' + ads[ad_count].thumbnail;
-    var bigpic_path = '/wp-content/uploads/ad/' + ads[ad_count].bigpic;
-    var ad_link = ads[ad_count].link;
-    var title = ads[ad_count].title;
-    var bname = ads[ad_count].business_name;
-    
-    output = "";
-    
-    //is the random dot in the no popup zone?
-    if (fv_no_popup_zone(no_popup_zone1[0], no_popup_zone1[1], no_popup_zone1[2], no_popup_zone1[3], coordinate[0], coordinate[1]) == false){
-        output = output_ad(title, bname, thumbnail_path, bigpic_path, ad_link, coordinate);
+        var ad_count = counter(ads.length);
+        var thumbnail_path = '/wp-content/uploads/ad/' + ads[ad_count].thumbnail;
+        var bigpic_path = '/wp-content/uploads/ad/' + ads[ad_count].bigpic;
+        var ad_link = ads[ad_count].link;
+        var title = ads[ad_count].title;
+        var bname = ads[ad_count].business_name;
+
+        output_one = "";
+
+        //is the random dot in each of the no popup areas?
+        var in_no_popup_area = 0;
+        
+        for (j = 0; j < no_popup_areas.length; j++){
+            
+            if (fv_in_no_popup_area(coordinate[0], coordinate[1], no_popup_areas[j]) == true){
+                in_no_popup_area = in_no_popup_area + 1;
+            }
+        }
+        
+        //if in non of the no popup areas
+        if (in_no_popup_area == 0){
+            output_one = output_ad(title, bname, thumbnail_path, bigpic_path, ad_link, coordinate);
+            output = output + output_one;
+        }
+
     }
-    
-	displayport.innerHTML = displayport.innerHTML + output;
+    displayport.innerHTML = displayport.innerHTML + output;
 }
 
 
+// is the dot in this no popup area?
+function fv_in_no_popup_area(dot_x, dot_y, no_popup_area){
+    
+    //convert grid x, y to pixel x, y. +1 offset correction to center dots. 
+    dot_x = (dot_x + 1) * grid_unit_size;
+    dot_y = (dot_y + 1) * grid_unit_size;
+    
+    area = fv_get_div_area(no_popup_area);
 
-// set a area free of popup ads.
-function fv_no_popup_zone(column1, column2, row1, row2, x, y){
-    if (column1 <= x * grid_unit_size && 
-        x * grid_unit_size <= column2 && 
-        row1 <= y * grid_unit_size && 
-        y * grid_unit_size <= row2)
+    if ((area['x'] < dot_x && dot_x < (area['x']+area['w'])) && (area['y'] < dot_y && dot_y < (area['y']+area['h'])))
     {
         return true;
         
     } else {
         return false;
+        
     }
+    
 }
 
 
+// get div area for no popup area.
+function fv_get_div_area(targetElement){
+    var area = new Object();
+        area['x'] = jQuery(targetElement).offset().left - grid_unit_size/2;
+        area['y'] = jQuery(targetElement).offset().top - grid_unit_size/2;
+        area['h'] = jQuery(targetElement).height() + grid_unit_size;
+        area['w'] = jQuery(targetElement).width() + grid_unit_size;
+    return area;
+}
 
 
-
-
-//HELPER FUNCTIONS
 //output html of a dot
 function output_ad(title, bname, thumbnail_path, bigpic_path, ad_link, coordinate){
     
-    output = output + "<a href='" + ad_link + "' target='_blank'><div class='fv_dot' style='left:" + coordinate[0] * grid_unit_size + "px;top:" + coordinate[1] * grid_unit_size + "px;background-image:url(" + thumbnail_path + ")'><div class='fv_bigpic'><div class='fv_caption'><div class='fv_caption_title'>" + title + "</div><div class='fv_caption_bname'>" + bname + "</div></div><img class='fv_bigpic_img' src='" + bigpic_path + "'></img></div></div></a>";
+    output = "<a href='" + ad_link + "' target='_blank'><div class='fv_dot' style='left:" + coordinate[0] * grid_unit_size + "px;top:" + coordinate[1] * grid_unit_size + "px;background-image:url(" + thumbnail_path + ")'><div class='fv_bigpic'><div class='fv_caption'><div class='fv_caption_title'>" + title + "</div><div class='fv_caption_bname'>" + bname + "</div></div><img class='fv_bigpic_img' src='" + bigpic_path + "'></img></div></div></a>";
     return output;
 }
-
 
 
 // show grid
@@ -223,7 +270,6 @@ function fv_show_grid(){
     }
     output = output + "</div>";
 }
-
 
 
 // a looper for looping entries inside data_ad.json across every rendering dots.

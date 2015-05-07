@@ -30,11 +30,11 @@
 	<header id="masthead" class="site-header" role="banner">        
         <nav class="navbar-top navbar navbar-default navbar-fixed-top" style="z-index:999;">
           <div class="container">
-            <div class="navbar-header navbar-block">
+            <div id="navbar-logo" class="navbar-header navbar-block">
 			  <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
             </div>
               
-            <ul class="nav navbar-nav navbar-left">
+            <ul id="navbar-menu" class="nav navbar-nav navbar-left">
                 <li class="dropdown">
                     
                   <a href="#" class="dropdown-toggle with-border" data-toggle="dropdown" role="button" aria-expanded="false" style="border:2px solid #444;padding:3px 6px;margin-top:-3px;margin-left:30px;" >
