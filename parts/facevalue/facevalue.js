@@ -130,13 +130,16 @@ function fv_render(font, ads){
         var ad_count = counter(ads.length);
         var thumbnail_path = '/wp-content/uploads/ad/' + ads[ad_count].thumbnail;
         var bigpic_path = '/wp-content/uploads/ad/' + ads[ad_count].bigpic;
+        var title = ads[ad_count].title;
+        var bname = ads[ad_count].business_name;
+        
         var ad_link = ads[ad_count].link;
         
         //toggle ads for debug
         if (show_ads == true){
             
             //output with ads
-            output = output_ad(thumbnail_path, bigpic_path, ad_link, render_matrix[i]);
+            output = output_ad(title, bname, thumbnail_path, bigpic_path, ad_link, render_matrix[i]);
             
         } else {
             
@@ -168,12 +171,14 @@ function fv_popup_random_ad(ads){
     var thumbnail_path = '/wp-content/uploads/ad/' + ads[ad_count].thumbnail;
     var bigpic_path = '/wp-content/uploads/ad/' + ads[ad_count].bigpic;
     var ad_link = ads[ad_count].link;
+    var title = ads[ad_count].title;
+    var bname = ads[ad_count].business_name;
     
     output = "";
     
     //is the random dot in the no popup zone?
     if (fv_no_popup_zone(no_popup_zone1[0], no_popup_zone1[1], no_popup_zone1[2], no_popup_zone1[3], coordinate[0], coordinate[1]) == false){
-        output = output_ad(thumbnail_path, bigpic_path, ad_link, coordinate);
+        output = output_ad(title, bname, thumbnail_path, bigpic_path, ad_link, coordinate);
     }
     
 	displayport.innerHTML = displayport.innerHTML + output;
@@ -202,9 +207,9 @@ function fv_no_popup_zone(column1, column2, row1, row2, x, y){
 
 //HELPER FUNCTIONS
 //output html of a dot
-function output_ad(thumbnail_path, bigpic_path, ad_link, coordinate){
+function output_ad(title, bname, thumbnail_path, bigpic_path, ad_link, coordinate){
     
-    output = output + "<a href='" + ad_link + "' target='_blank'><div class='fv_dot' style='left:" + coordinate[0] * grid_unit_size + "px;top:" + coordinate[1] * grid_unit_size + "px;background-image:url(" + thumbnail_path + ")'><img class='fv_bigpic' src='" + bigpic_path + "'></img></div></a>";
+    output = output + "<a href='" + ad_link + "' target='_blank'><div class='fv_dot' style='left:" + coordinate[0] * grid_unit_size + "px;top:" + coordinate[1] * grid_unit_size + "px;background-image:url(" + thumbnail_path + ")'><div class='fv_bigpic'><div class='fv_caption'><div class='fv_caption_title'>" + title + "</div><div class='fv_caption_bname'>" + bname + "</div></div><img class='fv_bigpic_img' src='" + bigpic_path + "'></img></div></div></a>";
     return output;
 }
 

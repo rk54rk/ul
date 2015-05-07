@@ -1,12 +1,17 @@
 .fv_char{float:left;}
 .fv_kerning{float:left;}
-.fv_dot{box-shadow: 4px 4px 12px rgba(0,0,0,0.2);background-color: #FFF;position:absolute;background-position: center;background-size: cover;}
+.fv_dot{box-shadow: 2px 4px 12px rgba(0,0,0,0.2);background-color: #FFF;position:absolute;background-position: center;background-size: cover;}
 
 .on{background-size: cover;background-color: #FFF;}
 .off{box-shadow: none;}
 
-.fv_bigpic{position:absolute;display:none;background-color:white;box-shadow: 8px 8px 24px rgba(0,0,0,0.2);z-index: 1000;pointer-events:none;}
+.fv_bigpic{position:absolute;display:none;background-color:white;z-index: 1000;pointer-events:none;}
+.fv_bigpic_img{box-shadow: 4px 12px 36px rgba(0,0,0,0.3);position:absolute;z-index:1}
 .fv_dot:hover .fv_bigpic{display:block;}
 
-.fv_caption{position:absolute;top:-25px;width:200px;display:none;background-color:white;box-shadow: 8px 8px 24px rgba(0,0,0,0.2);z-index: 999;}
-.fv_dot:hover .fv_caption{display:block}
+.fv_caption{position:absolute;top:-25px;width:200px;display:none;background-color:white;box-shadow: 4px 12px 36px rgba(0,0,0,0.3);z-index: 999;}
+.fv_dot:hover .fv_caption{display:block;}
+
+.fv_caption{position:absolute;padding:10px 15px 10px 10px;width:150px;left:-140px;line-height:16px!important;z-index:-1;}
+.fv_caption_title{font-size:6px;padding-bottom:5px;}
+.fv_caption_bname{padding-top:5px;font-size:6px;color:#BBB}
