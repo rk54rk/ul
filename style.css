@@ -25,7 +25,7 @@ a{color:#444;border-bottom: 1px solid #444}
 a:hover, a:focus{color:#444;text-decoration:none;border-bottom:none;color:#000;}
 
 /*typography*/
-body, html{font-family: 'Trocchi', serif;background-color:#EEE}
+body, html{font-family: 'Trocchi', serif;background-color:#EEE;background-image: url("assets/marble2.png");background-size: 33.4%;}
 span, p{font-size:18px;font-weight:normal;color:#444;}
 a{color:#444;font-size:18px;}
 h1, h2, h3, h4, h5, h6{font-weight:normal;color:#444;line-height: 1.2em;}

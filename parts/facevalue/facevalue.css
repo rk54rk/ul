@@ -1,6 +1,6 @@
 .fv_char{float:left;}
 .fv_kerning{float:left;}
-.fv_dot{box-shadow: 2px 4px 12px rgba(0,0,0,0.2);background-color: #FFF;position:absolute;background-position: center;background-size: cover;}
+.fv_dot{box-shadow: 2px 4px 12px rgba(0,0,0,0.3);background-color: #FFF;position:absolute;background-position: center;background-size: cover;}
 
 .on{background-size: cover;background-color: #FFF;}
 .off{box-shadow: none;}
@@ -9,7 +9,7 @@
 .fv_dot:hover .fv_bigpic{display:block;}
 .fv_bigpic_img{box-shadow: 4px 12px 36px rgba(0,0,0,0.3);position:absolute;z-index:1}
 
-.fv_caption{position:absolute;top:-25px;width:200px;background-color:white;box-shadow: 4px 12px 36px rgba(0,0,0,0.3);z-index:999;display:none;}
+.fv_caption{position:absolute;top:-25px;width:200px;background-color:white;box-shadow: 2px 6px 18px rgba(0,0,0,0.3);z-index:999;display:none;}
 .fv_dot:hover .fv_caption{display:block;}
 
 .fv_caption{position:absolute;padding:5px 15px 5px 10px;width:150px;left:-140px;top:-10px;line-height:16px!important;z-index:-1;}
