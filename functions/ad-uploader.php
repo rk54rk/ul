@@ -45,7 +45,7 @@ function ul_ad_saveimg($id_new, $title, $uploader_name, $ext, $size){
       $height = 100;
       $width = 100;      
   }
-    
+  
   /* Get original image x y*/
   list($w, $h) = getimagesize($_FILES[$uploader_name]['tmp_name']);
   /* calculate new image size */
@@ -75,9 +75,24 @@ function ul_ad_saveimg($id_new, $title, $uploader_name, $ext, $size){
       $w = ceil($width / $ratio);
     }
     
-
+    
   /* new file name */
   $path = ABSPATH . 'wp-content/uploads/ad/'.date('Y').'/'.$id_new.'_'.$size.'.'.$ext;
+    
+    
+  //if is GIF, check dimension and size and just upload
+  if ($ext == 'gif'){
+    
+    if (!file_exists(ABSPATH . 'wp-content/uploads/ad/'.date('Y'))) {
+        mkdir(ABSPATH . 'wp-content/uploads/ad/'.date('Y'), 0774, true);
+    }
+    move_uploaded_file($_FILES[$uploader_name]['tmp_name'], $path);
+  } 
+    
+    
+  //if not GIF, crop and resize and upload
+  else {
+    
   /* read binary data from image file */
   $imgString = file_get_contents($_FILES[$uploader_name]['tmp_name']);
   /* create image from string */
@@ -100,10 +115,10 @@ function ul_ad_saveimg($id_new, $title, $uploader_name, $ext, $size){
       imagejpeg($tmp, $path, 90);
       break;
     case 'image/png':
-      imagejpeg($tmp, $path, 90);
+      imagepng($tmp, $path, 0);
       break;
     case 'image/gif':
-      imagejpeg($tmp, $path, 90);
+      //shouldn't be gif at this point
       break;
     default:
       exit;
@@ -113,6 +128,7 @@ function ul_ad_saveimg($id_new, $title, $uploader_name, $ext, $size){
   /* cleanup memory */
   imagedestroy($image);
   imagedestroy($tmp);
+  }
 
   $url = site_url() . '/wp-content/uploads/ad/'.date('Y').'/'.$id_new.'_'.$size.'.'.$ext;
   return $url;
