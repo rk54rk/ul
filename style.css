@@ -28,7 +28,7 @@ a:hover, a:focus{color:#444;text-decoration:none;border-bottom:none;color:#000;}
 body, html{font-family: 'Trocchi', serif;background-color:#EEE;background-image: url("assets/marble2.png");background-size: 33.4%;}
 span, p{font-size:18px;font-weight:normal;color:#444;}
 a{color:#444;font-size:18px;}
-h1, h2, h3, h4, h5, h6{font-weight:normal;color:#444;line-height: 1.2em;}
+h1, h2, h3, h4, h5, h6{font-weight:normal;color:#444;line-height: 1.4em;}
 
 /*navbar*/
 .navbar-top{height:25px;min-height:25px;background-color:transparent;border-bottom:none;margin-top:25px}

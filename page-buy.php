@@ -18,9 +18,8 @@ get_header();?>
 <!--description-->
 <div class="col-sm-6" style="padding-right:100px;">
     <h2 style="margin-top:-4px">Buy our front page advertising</h2>
-    <p>Here you can put up a new advert on the front page of Unlimited Limited. Currently we charge £1 per advertising.</p>
-    <p>Our front page will only display 50 latest advertisings. That means your ad could be replaced by new ones after a while, however it will be stored in our archive indefinately.</p>
-    <p>You ad could also randomly appear on the printed matters of the Unlimited Limited.</p>
+    <h4>Here you can put up a new advert on the front page of Unlimited Limited. Currently we charge £1 per advertising.</h4>
+    <h5>Our front page will only display 50 latest advertisings. That means your ad could be replaced by new ones after a while, however it will be stored in our archive indefinately. You ad could also randomly appear on the printed matters of the Unlimited Limited.</h5>
 </div>
         
         
@@ -33,44 +32,70 @@ $max_file_size = 1024*500; // 500kb
 $valid_exts = array('jpeg', 'jpg', 'png', 'gif');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image']) AND isset($_FILES['thumbnail']) ) {
+  
+  $title = $_POST['title'];
+  $link = $_POST['link'];
+  $business = $_POST['business'];
+
+  //check input type
+  if ($title == ""){
+    exit('Please enter the advertising description.');
+  } else if (strlen($title) > 100){
+    exit('Please make sure the advertising description is under 100 characters.');
+  }
+  
+  if ($link == ""){
+    exit('Please enter the advertising link.');
+  } else if (strlen($link) > 200){
+    exit('Your advertising link is too long. (it can not be more than 200 characters)');
+  }
+  
+  if ($business == ""){
+    exit('Please enter the name of your business.');
+  } else if (strlen($business) > 50){
+    exit('Please make sure the business name you entered is under 50 characters.');
+  }
+    
   if( $_FILES['image']['size'] < $max_file_size && $_FILES['thumbnail']['size'] < $max_file_size){
     // get file extension
     $ext_l = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
     $ext_s = strtolower(pathinfo($_FILES['thumbnail']['name'], PATHINFO_EXTENSION));
     
-    // extra size and dimension check just for GIFs
-    if ($ext_s == 'gif'){
-        list($w, $h) = getimagesize($_FILES['thumbnail']['tmp_name']);
-        if( $_FILES['thumbnail']['size'] > 1024*50 ){
-            exit('When using GIF, thumbnail size can not be more than 50kb');
-        } 
-        if ( $w > 151 || $h > 151 ){
-            exit('When using GIF, thumbnail both sides should be less than 150 pixels. Currently '.$w.'/'.$h.' pixels.');
-        }
+    // size and dimension check for thumbnails
+    list($w, $h) = getimagesize($_FILES['thumbnail']['tmp_name']);
+    if( $_FILES['thumbnail']['size'] > 1024*50 ){
+        exit('Thumbnail size can not be more than 50kb');
+    } 
+    if ( $w > 200 || $h > 200 ){
+        exit('Thumbnail both sides should not be more than 200 pixels. Currently '.$w.'/'.$h.' pixels.');
     }
-    if ($ext_l == 'gif'){
-        list($w, $h) = getimagesize($_FILES['image']['tmp_name']);
-        if( $_FILES['image']['size'] > 1024*100 ){
-            exit('When using GIF, main image size can not be more than 100kb');
-        } 
-        if ( $w > 501 || $h > 501 ){
-            exit('When using GIF, main image both sides should be less than 500 pixels. Currently '.$w.'/'.$h.' pixels.');
-        }
+    
+    // size and dimension check for main pictures
+    list($w, $h) = getimagesize($_FILES['image']['tmp_name']);
+    if( $_FILES['image']['size'] > 1024*200 ){
+        exit('Main image size can not be more than 200kb');
+    } 
+    if ( $w > 600 || $h > 600 ){
+        exit('Main image both sides should not be more than 600 pixels. Currently '.$w.'/'.$h.' pixels.');
     }
     
     //general check if is in a valid image format
     if (in_array($ext_l, $valid_exts) && in_array($ext_s, $valid_exts)) {
         
       // add new database entry, get the id of the entry.
-      $title = $_POST['title'];
-      $link = $_POST['link'];
-      $business = $_POST['business'];
       $ad_id = ul_ad_add($title, $link, $business, $ext_l, $ext_s);
         
+      if ($ad_id == 0){
+          
+          exit('Error writting to database.');
+      
+      } else {
+    
       /* resize and save images */
       $file_L = ul_ad_saveimg($ad_id, $title, 'image', $ext_l, 'l');
       $file_S = ul_ad_saveimg($ad_id, $title, 'thumbnail', $ext_s, 's');
-      
+          
+      }
       
       // show second screen: confirmation page and Paypal button.
       ?>
@@ -94,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image']) AND isset($
         
         <br>
         
-        <div class="ad-img-s" style="height:50px;width:50px;background-color:#fff;border-radius: 50%;box-shadow: 4px 4px 12px rgba(0,0,0,0.2);background-size:cover;background-image: url('<?php echo $file_S;?>')"></div>
+        <div class="ad-img-s" style="height:50px;width:50px;border-radius: 50%;box-shadow: 4px 4px 12px rgba(0,0,0,0.2);background: url('<?php echo $file_S;?>');background-color:#fff;background-position: center center;background-repeat:no-repeat;background-size:cover;"></div>
         
         <br>
         <div class="bigpic">
@@ -102,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image']) AND isset($
                 <div class='fv_caption_title' style="font-size:6px;padding:5px 0;"><?php echo $_POST['title']; ?></div>
                 <div class='fv_caption_bname' style="padding:5px 0;font-size:6px;color:#BBB"><?php echo $_POST['business']; ?></div>
             </div>
-            <img class="bigpic_img" src="<?php echo $file_L;?>" class="ad-img-l" style="margin-left:140px;background-color:#fff;display:inline;box-shadow: 4px 12px 36px rgba(0,0,0,0.3);position:absolute;z-index:2;margin-top:10px"></img>
+            <img class="bigpic_img" src="<?php echo $file_L;?>" class="ad-img-l" style="margin-left:140px;background-color:#fff;display:inline;box-shadow: 4px 12px 36px rgba(0,0,0,0.3);position:absolute;z-index:2;margin-top:10px;max-width:300px;max-height:300px"></img>
         </div>
         <br>
 
@@ -126,11 +151,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image']) AND isset($
     <?php if(isset($msg)){echo $msg; echo '<br><br><br>';} ?>
     
     <div id="add-ad-1"> 
-        <h4>Step 1: create advertising</h4> NOTES:1UPLOAD NEED MORE TESTING WITH INVALID FILES. 2REFRESH RESUBMIT NEED TO BE DISABLED
+        <h4>Step 1: create advertising</h4>
         <form action="" method="post" enctype="multipart/form-data">
             
           <div class="form-group">
-            <label for="inputText">Advertising title, 100 charaters max.</label>
+            <label for="inputText">Advertising description, 100 charaters max.</label>
               <input class="form-control" name="title" placeholder="">
           </div>
             
@@ -146,20 +171,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['image']) AND isset($
                 <input class="form-control" name="link" placeholder="">
             </div>
           </div>
-          
-          <div>
-              File upload recommond jpg/jpeg/png files, see <span style="font-size:14px;text-decoration:underline" title="Max file size 500kb. To reduce server load, files will be compressed and resized to a maximum of 500 pixels each side on upload. ">techinal notes</span>. You can use animated GIF files, however they have <span style="font-size:14px;text-decoration:underline;" title='For thumbnail GIFs can be maximum 50kb, each side maximum 150 pixels; For main images GIFs can be maximum 100kb, each side maximum 500pixels.'>more technical requirements</span>. 
-          </div>
             
           <div class="form-group">            
               <label>Thumbnail which will show on the circular icons.</label>
+              <div style="font-size:11px">The thumbnail image can be jpg, png or gif. Maximum file size is 20kb, either side of the image should not be more than 200 pixels.</div>
               <input type="file" name="thumbnail" accept="image/*" />
           </div>
             
           <div class="form-group">            
               <label>Main advertising image.</label>
+              <div style="font-size:11px">The main image can be jpg, png or gif. Maximum file size is 200kb, either side of the image should not be more than 600 pixels. (This image will be displayed within a 300 * 300 pixel box, while HD displays will benefit from an image larger than this size.) </div>
               <input type="file" name="image" accept="image/*" />
           </div>
+          <div style="font-size:11px">Your uploaded images won't be resized or cropped by the server to ensure best image quality. However, you may need to edit your image before upload, with Photoshop or other image editor such as <a style="font-size:11px;" href="http://apps.pixlr.com/editor/">Pixelr</a>. You will find a preview of your advertising during the next step.</div>
+            
+            <br>
             
           <input type="submit" value="Next step" />
         </form>        

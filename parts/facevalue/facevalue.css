@@ -7,7 +7,7 @@
 
 .fv_bigpic{position:absolute;display:none;background-color:white;z-index: 1000;pointer-events:none;}
 .fv_dot:hover .fv_bigpic{display:block;}
-.fv_bigpic_img{box-shadow: 4px 12px 36px rgba(0,0,0,0.3);position:absolute;z-index:1}
+.fv_bigpic_img{background-color:white;box-shadow: 4px 12px 36px rgba(0,0,0,0.3);position:absolute;z-index:1;max-width:300px;max-height:300px}
 
 .fv_caption{position:absolute;top:-25px;width:200px;background-color:white;box-shadow: 2px 6px 18px rgba(0,0,0,0.3);z-index:999;display:none;}
 .fv_dot:hover .fv_caption{display:block;}

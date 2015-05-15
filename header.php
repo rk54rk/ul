@@ -20,7 +20,9 @@
 <link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'>
 <!-- Favicon -->
 <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/favicon.png" />
-
+<link rel="image_src" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/og-thumbnail.jpg" />
+    
+<meta property="og:description" content="Unlimited Limited is a venture communist corporation, or an austere capitalist commune. Making revenue from advertisement, it then distribute its humble wealth and power equally to anyone who wishes to become its shareholder." />
 <?php wp_head(); ?>
 </head>
 
