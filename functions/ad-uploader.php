@@ -36,17 +36,16 @@ function ul_ad_add($title, $link, $business, $ext_l, $ext_s){
 }
 
 
-function ul_ad_saveimg($id_new, $title, $uploader_name, $ext, $size){
-    
+function ul_ad_saveimg($id_new, $title, $file, $ext, $size){
   /* new file name */
   $path = ABSPATH . 'wp-content/uploads/ad/'.date('Y').'/'.$id_new.'_'.$size.'.'.$ext;
-    
-    
+  
     if (!file_exists(ABSPATH . 'wp-content/uploads/ad/'.date('Y'))) {
         mkdir(ABSPATH . 'wp-content/uploads/ad/'.date('Y'), 0774, true);
     }
-    move_uploaded_file($_FILES[$uploader_name]['tmp_name'], $path);
-
+  
+    //this is not right, should be move file.
+    rename($file['tmp_name'], $path);
 
   $url = site_url() . '/wp-content/uploads/ad/'.date('Y').'/'.$id_new.'_'.$size.'.'.$ext;
   return $url;
