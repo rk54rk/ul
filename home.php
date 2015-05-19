@@ -22,7 +22,7 @@ get_header(); ?>
     <a href="#" onclick="home_autoscroll()" class="dropdown-toggle"><span id="home-about" class="with-border home-button">About</span></a>
 </div>
 
-<div class="container-fluid" style="min-height:100vh;">
+<div class="container-fluid" style="min-height:100vh;background-color:#888;margin-top:-135px;padding-top:-135px">
 	<div class="row">
         <div style="height:30px;"></div>
 
@@ -33,7 +33,7 @@ get_header(); ?>
 </div>
 
 
-<div class="container-fluid" style="min-height:100vh;background-color:#FFFFC0;overflow:hidden;">
+<div class="container-fluid" style="min-height:100vh;overflow:hidden;">
 	<div class="row">
     	<div class="container" style="pointer-event:none;">
             <div class="row">

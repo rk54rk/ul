@@ -1,6 +1,6 @@
 .fv_char{float:left;}
 .fv_kerning{float:left;}
-.fv_dot{box-shadow: 2px 4px 12px rgba(0,0,0,0.3);background-color: #FFF;position:absolute;background-position: center;background-size: cover;}
+.fv_dot{box-shadow: 2px 4px 12px rgba(0,0,0,0.3);position:absolute;background-position: center;background-size: cover;}
 
 .on{background-size: cover;background-color: #FFF;}
 .off{box-shadow: none;}

@@ -1,0 +1,1 @@
+phantomjs rasterize.js http://localhost:8888 screenshot.png

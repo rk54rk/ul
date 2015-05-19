@@ -1,4 +1,7 @@
 <?php
+ob_start();
+session_start();
+
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 'On');  //On or Off
 // settings
@@ -9,28 +12,6 @@ $file_S = "";
 $file_L = "";
 $ad_id = "";
 
-get_header();
-session_start();
-?>
-
-
-<script>
-jQuery(function () {
-  jQuery('[data-toggle="tooltip"]').tooltip()
-})
-</script>
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-6" style="padding-right:100px;">
-        <h2 style="margin-top:-4px">Buy our front page advertising</h2>
-        <h4>Here you can put up a new advert on the front page of Unlimited Limited. Currently we charge £1 per advertising.</h4>
-        <h5>Our front page will only display 50 latest advertisings. That means your ad could be replaced by new ones after a while, however it will be stored in our archive indefinately. You ad could also randomly appear on the printed matters of the Unlimited Limited.</h5>
-    </div>
-        
-    <div id="add_ad_forms" class="col-sm-6">
-    
-<?php
 $post_data = "";
 $files = "";
 
@@ -62,7 +43,6 @@ if(count($_POST) > 0) {
       }
       move_uploaded_file($fromfile,$tofile);
       
-      unlink($fromfile);
       unset($file);
       unset($uploader);
     }
@@ -83,6 +63,28 @@ else if (isset($_SESSION['post_data']) AND isset($_SESSION['files'])){
   ul_destroy_session();
 }
 
+get_header();
+
+?>
+
+
+<script>
+jQuery(function () {
+  jQuery('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6" style="padding-right:100px;">
+        <h2 style="margin-top:-4px">Buy our front page advertising</h2>
+        <h4>Here you can put up a new advert on the front page of Unlimited Limited. Currently we charge £1 per advertising.</h4>
+        <h5>Our front page will only display 50 latest advertisings. That means your ad could be replaced by new ones after a while, however it will be stored in our archive indefinately. You ad could also randomly appear on the printed matters of the Unlimited Limited.</h5>
+    </div>
+        
+    <div id="add_ad_forms" class="col-sm-6">
+      
+<?php
     
     if ($post_data == "" AND $files == ""){
       ul_add_ad_render_step1();
@@ -228,6 +230,11 @@ function ul_add_ad_save_and_insert(){
     exit('Please choose a thumbnail image.');
   }
   
+  if ($files['image']['name'] == ""){
+    ul_destroy_session();
+    exit('Please choose a main advertising image file.');
+  }
+  
   if (!in_array($ext_l, $valid_exts)){
     ul_destroy_session();
     exit('File format of the main advertising image is not supported. (must be either jpg, png, or gif)');
@@ -237,12 +244,7 @@ function ul_add_ad_save_and_insert(){
     ul_destroy_session();
     exit('File format of the thumbnail is not supported. (must be either jpg, png, or gif)');
   }
-  
-  if ($files['image']['name'] == ""){
-    ul_destroy_session();
-    exit('Please choose a main advertising image file.');
-  }
-  
+
   // size and dimension check for thumbnails
   list($w, $h) = getimagesize($files['thumbnail']['tmp_name']);
   if( $files['thumbnail']['size'] > 1024*50 ){
