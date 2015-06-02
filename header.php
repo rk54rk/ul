@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/inc/bootstrap.min.css">
 <!-- Google fonts -->
 <link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'>
+<link href='<?php echo get_stylesheet_directory_uri(); ?>/assets/fonts/texgyreheros/stylesheet.css' rel='stylesheet' type='text/css'>
 <!-- Favicon -->
 <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/favicon.png" />
 <link rel="image_src" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/og-thumbnail.jpg" />

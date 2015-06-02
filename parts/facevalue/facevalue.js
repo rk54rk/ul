@@ -112,7 +112,7 @@ function fv_setup_grid(font){
     
     //write CSS rules for the dots
     jQuery('#addedCSS').remove();
-    jQuery('head').append('<style id="addedCSS" type="text/css">.fv_dot{height:' + grid_unit_size*2 + 'px;width:' + grid_unit_size*2 + 'px;border-radius: ' + grid_unit_size + 'px;}</style>');
+    jQuery('head').append('<style id="addedCSS" type="text/css">.fv_dot{position:absolute;height:' + grid_unit_size*2 + 'px;width:' + grid_unit_size*2 + 'px;border-radius: ' + grid_unit_size + 'px;}</style>');
 }
 
 

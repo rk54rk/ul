@@ -18,11 +18,11 @@ get_header(); ?>
 
 <!--reserved button for view all ads-->
 <div class="container">
-    <a href="<?php echo site_url( '/all-ads', 'http' ); ?>" class="dropdown-toggle"><span id="home-all-ads" class="with-border home-button">All ads</span></a>
+    <a href="<?php echo site_url( '/archive', 'http' ); ?>" class="dropdown-toggle"><span id="home-all-ads" class="with-border home-button">Archive</span></a>
     <a href="#" onclick="home_autoscroll()" class="dropdown-toggle"><span id="home-about" class="with-border home-button">About</span></a>
 </div>
 
-<div class="container-fluid" style="min-height:100vh;background-color:#888;margin-top:-135px;padding-top:-135px">
+<div class="container-fluid" style="min-height:100vh;background-color:#FFF;margin-top:-135px;padding-top:-135px">
 	<div class="row">
         <div style="height:30px;"></div>
 
