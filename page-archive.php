@@ -19,7 +19,7 @@ get_header();?>
 
   <!--description-->
   <div class="col-sm-6" style="padding-right:100px;">
-      <p>2014</p>
+      <p>All</p>
   </div>
     <div class="col-sm-6" style="padding-right:100px;">
     <?php 

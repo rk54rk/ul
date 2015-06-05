@@ -7,7 +7,7 @@ var top_margin = 4;
 var show_grid = false;
 var popup_on_load = 50; //how many random ad on page load?
 var no_popup_areas = ['#fv_home_text', '#home-all-ads', '#home-about', '#navbar-logo', '#navbar-menu'];
-
+var dot_id = 0;
 
 //declearing variables
 var ad_count;
@@ -66,9 +66,9 @@ function fv_init(){
 
 function fv_main(){
     //Load JSON files, main process inside
-    jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data_ad.json", function (ads) {
-        jQuery.getJSON("wp-content/themes/ul/parts/facevalue/font.json", function (font) {
-            jQuery.getJSON("wp-content/themes/ul/parts/facevalue/data.json", function (data) {
+    jQuery.getJSON("../wp-content/themes/ul/parts/facevalue/data_ad.json", function (ads) {
+        jQuery.getJSON("../wp-content/themes/ul/parts/facevalue/font.json", function (font) {
+            jQuery.getJSON("../wp-content/themes/ul/parts/facevalue/data.json", function (data) {
 
                 display_type = data.type;
                 display_type_characters = display_type.split("");
@@ -256,9 +256,13 @@ function fv_get_div_area(targetElement){
 
 //output html of a dot
 function output_ad(title, bname, thumbnail_path, bigpic_path, ad_link, coordinate){
+  
+  dot_id = dot_id + 1;
+  dot_id_output = 'dot'+dot_id;
     
-    output = "<a href='" + ad_link + "' target='_blank'><div class='fv_dot' style='left:" + coordinate[0] * grid_unit_size + "px;top:" + coordinate[1] * grid_unit_size + "px;background-image:url(" + thumbnail_path + ")'><div class='fv_bigpic'><div class='fv_caption'><div class='fv_caption_title'>" + title + "</div><div class='fv_caption_bname'>" + bname + "</div></div><img class='fv_bigpic_img' src='" + bigpic_path + "'></img></div></div></a>";
-    return output;
+  output = "<a href='" + ad_link + "' target='_blank'><div id='" + dot_id_output + "' class='fv_dot' style='left:" + coordinate[0] * grid_unit_size + "px;top:" + coordinate[1] * grid_unit_size + "px;background-image:url(" + thumbnail_path + ")'><div class='fv_bigpic'><div class='fv_caption'><div class='fv_caption_title'>" + title + "</div><div class='fv_caption_bname'>" + bname + "</div></div><img class='fv_bigpic_img' src='" + bigpic_path + "'></img></div></div></a>";
+  
+  return output;
 }
 
 
