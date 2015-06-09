@@ -17,7 +17,7 @@
 <!-- Bootstrap from CDN -->
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/inc/bootstrap.min.css">
 <!-- Google fonts -->
-<link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'>
+<link href='<?php echo get_stylesheet_directory_uri(); ?>/assets/fonts/trocchi/stylesheet.css' rel='stylesheet' type='text/css'>
 <link href='<?php echo get_stylesheet_directory_uri(); ?>/assets/fonts/texgyreheros/stylesheet.css' rel='stylesheet' type='text/css'>
 <!-- Favicon -->
 <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/favicon.png" />
@@ -40,13 +40,14 @@
             <ul id="navbar-menu" class="nav navbar-nav navbar-left">
                 <li class="dropdown">
                     
-                  <a href="#" class="dropdown-toggle with-border" data-toggle="dropdown" role="button" aria-expanded="false" style="border:2px solid #444;padding:3px 6px;margin-top:-3px;margin-left:30px;" >
+                  <a href="#" class="dropdown-toggle with-border" data-toggle="dropdown" role="button" aria-expanded="false" style="border:2px solid #000;padding:3px 6px;margin-top:-3px;margin-left:30px;" >
                       <span>Menu</span>
                   </a>
                     
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="<?php echo site_url( '/#about', 'http' ); ?>">About</a></li>
                     <li><a href="<?php echo site_url( '/buy', 'http' ); ?>">Buy an ad</a></li>
+                    <li><a href="<?php echo site_url( '/archive', 'http' ); ?>">Archive</a></li>
                     <li><a href="http://hq.unlimitedltd.co/signup">Join the company</a></li>
                     <li><a href="http://hq.unlimitedltd.co">Headquarters</a></li>
                   </ul>

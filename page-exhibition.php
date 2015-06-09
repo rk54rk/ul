@@ -18,7 +18,7 @@ get_header(); ?>
 
 <!-- styles specific to exhibition environment -->
 <style>
-  body, html{background-color:#000;background-image:none;overflow:hidden}
+  body, html{background-color:#000;background-image:none;overflow-x:hidden}
   .fv_dot{}
   #navbar-menu{display:none;}
   #navbar-logo a{display:none;}
@@ -27,12 +27,15 @@ get_header(); ?>
 </style>
 
 <!-- hidden for exhibition version -->
-<div class="container" style="display:none;" data-scroll-index="0">
+<div class="container" style="display:none" data-scroll-index="0">
     <a href="<?php echo site_url( '/archive', 'http' ); ?>" class="dropdown-toggle"><span id="home-all-ads" class="with-border home-button">Archive</span></a>
     <a href="#" onclick="home_autoscroll()" class="dropdown-toggle"><span id="home-about" class="with-border home-button">About</span></a>
+  
+  <a href="/exhibition/#page1" id="toggle-page1">page1</a>
+  <a href="/exhibition/#page2" id="toggle-page2">page2</a>
 </div>
 
-<div class="container-fluid" style="min-height:100vh;margin-top:-135px;padding-top:-135px">
+<div name="page1" class="container-fluid" style="min-height:100vh;margin-top:-135px;padding-top:-135px">
 	<div class="row">
         <div style="height:30px;"></div>
 
@@ -43,17 +46,47 @@ get_header(); ?>
 </div>
 
 
-<div class="container-fluid" style="min-height:100vh;overflow:hidden;" data-scroll-index="1">
+<div name="page2" class="container-fluid" style="min-height:100vh;overflow:hidden;" data-scroll-index="1">
 	<div class="row">
     	<div class="container" style="pointer-event:none;">
             <div class="row">
                 <div class="col-sm-6" style="height:100px;"></div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div id="fv_home_text" class="col-sm-6">
                     
-                    <p id="fv_home_text" style="color:white;text-align:left">Unlimited Limited is a venture communist corporation, or an austere capitalist commune. It is an experiment on the form of the business organization. Making revenue from advertisement, it then distribute its humble wealth and power equally to its shareholders, which is open for anyone to sign up, free of charge.</p>
-                    <A name="about"></A>
+                  <p style="color:white;text-align:left">Unlimited Limited is a venture communist corporation, or an austere capitalist commune. It is an experiment on the form of the business organization. Making revenue from advertisement, it then distribute its humble wealth and power equally to its shareholders.</p>
+                  <br>
+                  
+                  <div style="font-size:18px;margin-bottom:13px;color:white;border-bottom:2px solid white">Financial summary</div>
+                    <p style="color:white;text-align:left">
+                      Total value: 
+                      <?php
+                      $data_raw = file_get_contents( get_stylesheet_directory_uri() . '/parts/facevalue/data.json');
+                      $data = json_decode($data_raw);
+                      $value = $data->{'value'};
+                      echo '£'.$value;
+                      ?>
+                      <br>
+                      
+                      Shareholders: 
+                      <?php
+                      $xml=simplexml_load_file("http://hq.unlimitedltd.co/api") or die("Error: Cannot connect to ulhq");
+                      $shareholderCount = $xml->shareholder;
+                      echo $shareholderCount;
+                      ?>
+                      <br>
+                      Worth of one share: 
+                      <?php 
+                      $share_value = ($value / $shareholderCount);
+                      echo '£' . number_format((float)$share_value, 2, '.', '');
+                      ?>
+                    </p>
+                  <br>
+                  
+                  <div style="font-size:18px;margin-bottom:13px;color:white;border-bottom:2px solid white">Participate</div>
+                  <p style="color:white;text-align:left">You can join as a shareholder now for free, or participate by purchasing an advertisment for £1, at http://unlimitedltd.co.</p>
+                  <br>
                 </div>
             </div>
         </div>
@@ -69,11 +102,11 @@ var d_dot;
 setInterval(
   function () {
     if (s==0){
-      home_autoscroll();
+      jQuery('#toggle-page1').click();
       s = 1;
     }
     else{
-      home_autoscroll_top();
+      jQuery('#toggle-page2').click();
       s = 0;
     }
   }, 10000
